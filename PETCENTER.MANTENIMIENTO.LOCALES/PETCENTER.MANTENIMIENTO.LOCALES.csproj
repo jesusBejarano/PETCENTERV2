@@ -290,6 +290,7 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\yo.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Images\buscar.png" />
     <Content Include="Images\calendar.png" />
     <Content Include="Images\editar.png" />
     <Content Include="Images\eliminar.png" />
@@ -305,6 +306,7 @@
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarSolicutudesjs.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-RegistroFichaController.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-RegistroSolicitudController.js" />
+    <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarSolicitarMantenimiento.js" />
     <Content Include="Scripts\ControladorasAngular\servicios-Conector.js" />
     <Content Include="Scripts\Externos\angular-idle.js" />
     <Content Include="Scripts\Externos\angular-resource.js" />
@@ -405,6 +407,9 @@
     <Content Include="Views\Ficha\ConsultaFicha.cshtml" />
     <Content Include="Views\Ficha\AgregarMantenimiento.cshtml" />
     <Content Include="Views\Ficha\BuscarMantenimiento.cshtml" />
+    <Content Include="Views\Ficha\BuscarSolicitudFicha.cshtml" />
+    <Content Include="Views\Ficha\BuscarActividad.cshtml" />
+    <Content Include="Views\Ficha\BuscarMateriales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

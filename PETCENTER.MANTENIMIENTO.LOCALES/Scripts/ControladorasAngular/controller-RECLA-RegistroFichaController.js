@@ -372,11 +372,12 @@
                             }
                         });
                     };
+
                     
                     $scope.BuscarMantenimiento_Click = function () {
                         var altura = 800;
                         getPopupResponsive({
-                            formURL: "BuscarMantenimiento",
+                            formURL: "BuscarSolicitudFicha",
                             title: "Buscar Mantenimiento",
                             nombreDiv: "divPopupBuscarMantenimiento",
                             nombreGrid: "",
@@ -397,15 +398,38 @@
                     };
 
 
-                    jQuery("#listaMantenimientos").jqGrid({
+                    jQuery("#listaActividades").jqGrid({
 
                         datatype: "local",
-                        colNames: ['Código', 'Nombre', 'Fecha Mantenimiento', 'Descripcion', 'Eliminar'],
+                        colNames: ['Código', 'Descripción', 'Eliminar'],
                         colModel: [
                             { name: 'Codigo', index: 'Codigo', width: 220, align: "center" },
-                            { name: 'Nombre', index: 'Nombre', width: 220, align: "center" },
-                            { name: 'FechaMantenimiento', index: 'FechaMantenimiento', width: 220, align: "center" },
                             { name: 'Descripcion', index: 'Descripcion', width: 220, align: "center" },
+                           {
+                               name: 'Eliminar',
+                               align: 'center',
+                               sortable: false,
+                               width: 250,
+                               formatter: function (cellvalue, options, rowObject) {
+                                   return "<div style='width:100%;padding-left:10px'>" +
+                                     "<a style='cursor:pointer;width:100%'>" +
+                                     "<button title='Eliminar'  onclick='Eliminar(" + options.rowId + ")' class='boton1Style botonpequenio'>" +
+                                     "<img width='16' height='16' src='/Images/eliminar.png'></button></a></div>";
+                               }
+                           }
+                        ],
+                        shrinkToFit: false,
+                        autowidth: true
+                    });
+
+                    jQuery("#listaMateriales").jqGrid({
+
+                        datatype: "local",
+                        colNames: ['Código', 'Descripción', 'Cantidad','Eliminar'],
+                        colModel: [
+                            { name: 'Codigo', index: 'Codigo', width: 220, align: "center" },
+                            { name: 'Descripcion', index: 'Descripcion', width: 220, align: "center" },
+                            { name: 'Cantidad', index: 'Cantidad', width: 220, align: "center" },
                            {
                                name: 'Eliminar',
                                align: 'center',

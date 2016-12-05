@@ -117,5 +117,23 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Controllers
 
             return View();
         }
+        public ActionResult BuscarSolicitudFicha()
+        {
+            ViewBag.Message = "Modifique esta plantilla para poner en marcha su aplicación ASP.NET MVC.";
+
+            return View();
+        }
+        public ActionResult BuscarActividad()
+        {
+            ViewBag.Message = "Modifique esta plantilla para poner en marcha su aplicación ASP.NET MVC.";
+
+            return View();
+        }
+        public ActionResult BuscarMateriales()
+        {
+            ViewBag.Message = "Modifique esta plantilla para poner en marcha su aplicación ASP.NET MVC.";
+
+            return View();
+        }
     }
 }

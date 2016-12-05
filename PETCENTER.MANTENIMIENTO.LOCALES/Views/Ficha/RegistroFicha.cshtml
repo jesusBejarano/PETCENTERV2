@@ -2,6 +2,7 @@
 <script type="text/javascript" src="~/Scripts/ControladorasAngular/controller-RECLA-RegistroFichaController.js"></script>
 @*<script type="text/javascript" src="/Scripts/ControladorasAngular/controller-RECLA-AgregarMantenimiento.js"></script>*@
 <script type="text/javascript" src="~/Scripts/ControladorasAngular/controller-RECLA-BuscarMantenimiento.js"></script>
+<script type="text/javascript" src="/Scripts/ControladorasAngular/controller-RECLA-BuscarSolicitarMantenimiento.js"></script>
 <div id="ContenedorBody" style="width: 100%; clear: both; position: static; zoom: 1;">
     <div>
         <div id="centroPagina" class="currentPageClass col-md-12 wrapper  wrapperMediano" style="padding-top: 0px !important; padding-bottom: 0px !important; border: 0px !important; position: relative">
@@ -91,211 +92,427 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="seccion-2">
-                            <div>
-                                <div class="block_cab block_cab_active">
-                                    <h2>
-                                        <span>Datos Mantenimiento</span>
-                                    </h2>
-                                    <h3></h3>
-                                    <div class="acordeon">
+                    <div id="seccion-2">
+                    <div>
+                    <div class="block_cab block_cab_active">
+                        <h2>
+                            <span>Datos Mantenimiento</span>
+                        </h2>
+                        <h3></h3>
+                        <div class="acordeon">
+                        </div>
+                    </div>
+                    <form id="RegistroFichaFrm" name="RegistroFichaFrm" class="ng-pristine ng-invalid ng-invalid-required">
+                    <div class="block_content" style="width: 100%">
+                    <!------------------- 1 Seccion -------------------------------------------->
+                    @*                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-12 row">
+                                <div class="col-md-4">
+                                    Nro Ficha
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                           ng-model="$root.DatosFormulario.DatosFicha
+.NumeroSolicitud"
+                                      ng-disabled="$root.DatosFormulario.DatosFichaCargaInicial.HabilitadoNumeroSolicitud=='False' || FlagEditing==false">
+                                    <div class="caja11 msgerror NumeroSolicitud">
+                                        <span class="field-validation-valid msgerror" data-valmsg-for="root.DatosFormulario.DatosFicha
+.NumeroSolicitud" data-valmsg-replace="true"></span>
                                     </div>
                                 </div>
-                                <form id="RegistroFichaFrm" name="RegistroFichaFrm" class="ng-pristine ng-invalid ng-invalid-required">
-                                    <div class="block_content" style="width: 100%">
-                                        <!------------------- 1 Seccion -------------------------------------------->
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="col-md-12 row">
-                                                        <div class="col-md-4">
-                                                            Nro Ficha
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
-                                                                   ng-model="$root.DatosFormulario.DatosFicha.NumeroSolicitud"
-                                                                   ng-disabled="$root.DatosFormulario.DatosFichaCargaInicial.HabilitadoNumeroSolicitud=='False' || FlagEditing==false">
-                                                            <div class="caja11 msgerror NumeroSolicitud">
-                                                                <span class="field-validation-valid msgerror" data-valmsg-for="root.DatosFormulario.DatosFicha.NumeroSolicitud" data-valmsg-replace="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="col-md-4">
-                                                        Fecha Solicitud
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input class="InputTEXT_04Fecha"
-                                                               maxlength="10" type="text"
-                                                               ng-model="$root.DatosFormulario.DatosFicha.FechaSolicitud"
-                                                               data-bind="dateValue: $root.DatosFormulario.DatosFicha.FechaSolicitud,datePattern: 'dd/MM/yyyy'"
-                                                               data-val="true"
-                                                               data-val-required="Fecha Ficha es requerido."
-                                                               ng-enter="Enter()"
-                                                               data-val-date="El campo Fecha Ficha debe ser una fecha."
-                                                               id="FechaSolicitud"
-                                                               name="$root.DatosFormulario.DatosFicha.FechaSolicitud"
-                                                         
-                                                               required />
-                                                        <div class="caja11 msgerror FechaSolicitud">
-                                                            <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.FechaSolicitud" data-valmsg-replace="true"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="col-md-12 row">
-                                                        <div class="col-md-8">
-                                                            <button type="button" class="btn btn-primary"ng-click="BuscarMantenimiento_Click();" style="width: 200px;" ng-disabled="FlagEditing==false">
-                                                            Buscar Mantenimiento
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <!------------------- 2 Seccion -------------------------------------------->
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="col-md-12 row">
-                                                        <div class="col-md-4">
-                                                            Tipo Mantenimiento
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <select ng-model="$root.DatosFormulario.DatosSolicitud.CodigoTipoMantenimiento"
-                                                                    ng-options="tp.Codigo as tp.Descripcion for tp in $root.DatosFormulario.DatosSolicitudCargaInicial.TipoMantenimiento"
-                                                                    class="InputSELECT_01"
-                                                                    data-val="true"
-                                                                    data-val-required="Tipo Mantenimiento es requerido."
-                                                                    id="$root.DatosFormulario.DatosSolicitud.CodigoTipoMantenimiento"
-                                                                    name="$root.DatosFormulario.DatosSolicitud.CodigoTipoMantenimiento"
-                                                                    ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoTipoMantenimiento=='False' || FlagEditing==false"
-                                                                    required>
-                                                                <option value="" class="">[Seleccione]</option>
-                                                            </select>
-                                                            <div class="caja11 msgerror CodigoTipoMantenimiento">
-                                                                <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.CodigoTipoMantenimiento" data-valmsg-replace="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="col-md-12 row">
-                                                        <div class="col-md-4">
-                                                            Sede
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <select ng-model="$root.DatosFormulario.DatosSolicitud.CodigoSede"
-                                                                    ng-options="sede.Codigo as sede.Descripcion for sede in $root.DatosFormulario.DatosSolicitudCargaInicial.Sede"
-                                                                    class="InputSELECT_01"
-                                                                    data-val="true"
-                                                                    data-val-required="Sede es requerido."
-                                                                    id="$root.DatosFormulario.DatosSolicitud.CodigoSede"
-                                                                    name="$root.DatosFormulario.DatosSolicitud.CodigoSede"
-                                                                    ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoSede=='False' || FlagEditing==false"
-                                                                    required>
-
-                                                                <option value="" class="">[Seleccione]</option>
-                                                            </select>
-                                                            <div class="caja11 msgerror CodigoSede">
-                                                                <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.CodigoSede" data-valmsg-replace="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                
-
-                                            </div>
-                                        </div>
-                                        <!------------------- 3 Seccion -------------------------------------------->
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="col-md-12 row">
-                                                        <div class="col-md-4">
-                                                            Área
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <select ng-model="$root.DatosFormulario.DatosSolicitud.CodigoArea"
-                                                                    ng-options="area.Codigo as area.Descripcion for area in $root.DatosFormulario.DatosSolicitudCargaInicial.Area"
-                                                                    class="InputSELECT_01"
-                                                                    id="$root.DatosFormulario.DatosSolicitud.CodigoArea"
-                                                                    data-val="true"
-                                                                    data-val-required="Área es requerido."
-                                                                    name="$root.DatosFormulario.DatosSolicitud.CodigoArea"
-                                                                    ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoArea=='False' || FlagEditing==false"
-                                                                    required>
-                                                                <option value="" class="">[Seleccione]</option>
-                                                            </select>
-                                                            <div class="caja11 msgerror CodigoArea">
-                                                                <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.CodigoArea" data-valmsg-replace="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @*                       <div class="col-md-6">
-                                                        <div class="col-md-12 row">
-                                                            <div class="col-md-4">
-                                                                Estado
-                                                            </div>
-                                                            <div class="col-md-8">
-                                                                <select ng-model="$root.DatosFormulario.DatosSolicitud.CodigoEstado"
-                                                                        ng-options="estado.Codigo as estado.Descripcion for estado in $root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Estado"
-                                                                        class="InputSELECT_01 ng-pristine ng-valid"
-                                                                        id="$root.DatosFormulario.DatosSolicitud.CodigoEstado"
-                                                                        data-val="true"
-                                                                        name="$root.DatosFormulario.DatosSolicitud.CodigoEstado"
-                                                                        ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoEstado=='False'">
-                                                                    <option value="" class="">[Seleccione]</option>
-                                                                </select>
-                                                                <div class="caja11 msgerror CodigoEstadoGeneral">
-                                                                    <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.CodigoEstado" data-valmsg-replace="true"></span>
-                                                                </div>
-                                                            </div>
-                                                         </div>
-                                                    </div>*@
-                                            </div>
-                                        </div>
-                                        <!------------------- 4 Seccion -------------------------------------------->
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="col-md-12 row">
-                                                        <div class="col-md-3">
-                                                            Descripcion
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <textarea class="InputTEXT_06"
-                                                                      ng-model="$root.DatosFormulario.DatosSolicitud.Descripcion"
-                                                                      id="$root.DatosFormulario.DatosSolicitud.Descripcion"
-                                                                      data-val="true"
-                                                                      data-val-required="Descripcion es requerido."
-                                                                      name="$root.DatosFormulario.DatosSolicitud.Descripcion"
-                                                                      ng-disabled="FlagEditing==false"
-                                                                      maxlength="1000"
-                                                                      required></textarea>
-                                                            <div class="caja11 msgerror Descripcion">
-                                                                <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.Descrpcion" data-valmsg-replace="true"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
-                        <div id="seccion-3">
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                Fecha Solicitud
+                            </div>
+                            <div class="col-md-8">
+                                <input class="InputTEXT_04Fecha"
+                                       maxlength="10" type="text"
+                                       ng-model="$root.DatosFormulario.DatosFicha
+.FechaSolicitud"
+                                       data-bind="dateValue: $root.DatosFormulario.DatosFicha
+.FechaSolicitud,datePattern: 'dd/MM/yyyy'"
+                                       data-val="true"
+                                       data-val-required="Fecha Solicitud es requerido."
+                                       ng-enter="Enter()"
+                                       data-val-date="El campo Fecha Solucitud debe ser una fecha."
+                                       id="FechaSolicitud"
+                                       name="$root.DatosFormulario.DatosFicha
+.FechaSolicitud"
+                                       required />
+                                <div class="caja11 msgerror FechaSolicitud">
+                                    <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.FechaSolicitud" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                     
+                    </div>
+                </div>*@
+                    <!------------------- 2 Seccion -------------------------------------------->
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        N° Solicitud Mantenimiento
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                               ng-model="$root.DatosFormulario.DatosFicha.NumeroSolicitud" disabled>
+
+                                        <input type="image" ng-disabled="FlagEditing==false"
+                                               ng-click="BuscarMantenimiento_Click();" value="Buscar"
+                                               src="\Images\buscar.png" class="" style="border-width: 0px; width: 25px; margin-bottom: -10px;">
+                                        <div class="caja11 msgerror NumeroSolicitud">
+                                            <span class="field-validation-valid msgerror" data-valmsg-for="root.DatosFormulario.DatosFicha
+.NumeroSolicitud" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <!------------------- 1 Seccion -------------------------------------------->
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        Descripcion Solicitud
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                               ng-model="$root.DatosFormulario.DatosFicha.DescripcionSoliciud" disabled>
+                                        <div class="caja11 msgerror NumeroSolicitud">
+                                            <span class="field-validation-valid msgerror" data-valmsg-for="root.DatosFormulario.DatosFicha
+.NumeroSolicitud" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    Descripcion Mantenimiento
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                           ng-model="$root.DatosFormulario.DatosFicha.DescripcionMantenimiento" disabled=""/>
+                                    <div class="caja11 msgerror FechaSolicitud">
+                                        <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.FechaSolicitud" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!------------------- 2 Seccion -------------------------------------------->
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        Tipo Mantenimiento
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select ng-model="$root.DatosFormulario.DatosFicha
+.CodigoTipoMantenimiento"
+                                                ng-options="tp.Codigo as tp.Descripcion for tp in $root.DatosFormulario.DatosFichaCargaInicial.TipoMantenimiento"
+                                                class="InputSELECT_01"
+                                                data-val="true"
+                                                data-val-required="Tipo Mantenimiento es requerido."
+                                                id="$root.DatosFormulario.DatosFicha
+.CodigoTipoMantenimiento"
+                                                name="$root.DatosFormulario.DatosFicha
+.CodigoTipoMantenimiento"
+                                                ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoTipoMantenimiento=='False' || FlagEditing==false"
+                                                required>
+                                            <option value="" class="">[Seleccione]</option>
+                                        </select>
+                                        <div class="caja11 msgerror CodigoTipoMantenimiento">
+                                            <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.CodigoTipoMantenimiento" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        Sede
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select ng-model="$root.DatosFormulario.DatosFicha
+.CodigoSede"
+                                                ng-options="sede.Codigo as sede.Descripcion for sede in $root.DatosFormulario.DatosFichaCargaInicial.Sede"
+                                                class="InputSELECT_01"
+                                                data-val="true"
+                                                data-val-required="Sede es requerido."
+                                                id="$root.DatosFormulario.DatosFicha
+.CodigoSede"
+                                                name="$root.DatosFormulario.DatosFicha
+.CodigoSede"
+                                                ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoSede=='False' || FlagEditing==false"
+                                                required>
+
+                                            <option value="" class="">[Seleccione]</option>
+                                        </select>
+                                        <div class="caja11 msgerror CodigoSede">
+                                            <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.CodigoSede" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!------------------- 3 Seccion -------------------------------------------->
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        Área
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select ng-model="$root.DatosFormulario.DatosFicha
+.CodigoArea"
+                                                ng-options="area.Codigo as area.Descripcion for area in $root.DatosFormulario.DatosFichaCargaInicial.Area"
+                                                class="InputSELECT_01"
+                                                id="$root.DatosFormulario.DatosFicha
+.CodigoArea"
+                                                data-val="true"
+                                                data-val-required="Área es requerido."
+                                                name="$root.DatosFormulario.DatosFicha
+.CodigoArea"
+                                                ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoArea=='False' || FlagEditing==false"
+                                                required>
+                                            <option value="" class="">[Seleccione]</option>
+                                        </select>
+                                        <div class="caja11 msgerror CodigoArea">
+                                            <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.CodigoArea" data-valmsg-replace="true"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*                       <div class="col-md-6">
+                            <div class="col-md-12 row">
+                                <div class="col-md-4">
+                                    Estado
+                                </div>
+                                <div class="col-md-8">
+                                    <select ng-model="$root.DatosFormulario.DatosFicha
+.CodigoEstado"
+                                            ng-options="estado.Codigo as estado.Descripcion for estado in $root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Estado"
+                                            class="InputSELECT_01 ng-pristine ng-valid"
+                                            id="$root.DatosFormulario.DatosFicha
+.CodigoEstado"
+                                            data-val="true"
+                                            name="$root.DatosFormulario.DatosFicha
+.CodigoEstado"
+                                            ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoEstado=='False'">
+                                        <option value="" class="">[Seleccione]</option>
+                                    </select>
+                                    <div class="caja11 msgerror CodigoEstadoGeneral">
+                                        <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.CodigoEstado" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>*@
+                        </div>
+                    </div>
+                    <!------------------- 4 Seccion -------------------------------------------->
+                    @*                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="col-md-12 row">
+                                <div class="col-md-3">
+                                    Descripcion
+                                </div>
+                                <div class="col-md-8">
+                                     <textarea      class="InputTEXT_06" 
+  													ng-model="$root.DatosFormulario.DatosFicha
+.Descripcion"
+  													id="$root.DatosFormulario.DatosFicha
+.Descripcion"
+   													data-val="true"
+                                                    data-val-required="Descripcion es requerido."
+                                                    name="$root.DatosFormulario.DatosFicha
+.Descripcion"
+  													ng-disabled="FlagEditing==false"
+  													maxlength="1000"
+                                                    required>
+                                      </textarea>
+                                    <div class="caja11 msgerror Descripcion">
+                                        <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.Descrpcion" data-valmsg-replace="true"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>*@
+                    </div>
+                    </form>
+                    </div>
+                    </div>
+                    <div id="seccion-3">
+                    <div>
+                    <div class="block_cab block_cab_active">
+                        <h2>
+                            <span>Datos Ficha Mantenimiento</span>
+                        </h2>
+                        <h3></h3>
+                        <div class="acordeon">
+                        </div>
+                    </div>
+                        <form id="RegistroFichaFrm" name="RegistroFichaFrm" class="ng-pristine ng-invalid ng-invalid-required">
+                            <div class="block_content" style="width: 100%">
+
+
+                                <!------------------- 1 Seccion -------------------------------------------->
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 row">
+                                                <div class="col-md-4">
+                                                    Descripcion Ficha
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                                           ng-model="$root.DatosFormulario.DatosFicha.DescripcionFicha">
+                                                    <div class="caja11 msgerror NumeroSolicitud">
+                                                        <span class="field-validation-valid msgerror" data-valmsg-for="root.DatosFormulario.DatosFicha
+.NumeroSolicitud" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-4">
+                                                Fecha Mantenimiento
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input class="InputTEXT_04Fecha"
+                                                       maxlength="10" type="text"
+                                                       ng-model="$root.DatosFormulario.DatosFicha.FechaMantenimiento"
+                                                       data-bind="dateValue: $root.DatosFormulario.DatosFicha.FechaMantenimiento,datePattern: 'dd/MM/yyyy'"
+                                                       data-val="true"
+                                                       data-val-required="Fecha Mantenimiento es requerido."
+                                                       ng-enter="Enter()"
+                                                       data-val-date="El campo Fecha Mantenimiento debe ser una fecha."
+                                                       id="FechaMantenimiento"
+                                                       name="$root.DatosFormulario.DatosFicha.FechaMantenimiento"
+                                                       required/>
+                                                <div class="caja11 msgerror FechaMantenimiento">
+                                                    <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.FechaSolicitud" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!------------------- 2 Seccion -------------------------------------------->
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 row">
+                                                <div class="col-md-4">
+                                                    Hora Mantenimiento
+                                                </div>
+                                                <div class="col-md-8">
+                                                  <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                           ng-model="$root.DatosFormulario.DatosFicha.HoraMantenimiento" />
+                                                    <div class="caja11 msgerror CodigoTipoMantenimiento">
+                                                        <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.CodigoTipoMantenimiento" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 row">
+                                                <div class="col-md-4">
+                                                    Número Técnicos
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                           ng-model="$root.DatosFormulario.DatosFicha.NumeroTecnicos" />
+                                                    <div class="caja11 msgerror CodigoSede">
+                                                        <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
+.CodigoSede" data-valmsg-replace="true"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!------------------- 3 Seccion -------------------------------------------->
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                    </div>
+
+                    <div id="seccion-4">
+                        <div style="display: none">0</div>
+                        <div style="width: 100%; float: left">
+                            <div class="block_cab block_cab_active">
+                                <h2>
+                                    <span>Lista de Actividades</span>
+                                </h2>
+                                <h3></h3>
+                                <div class="acordeon">
+                                </div>
+                            </div>
+                            <div class="block_menu block_content">
+                                <div style="max-width: 100%; height: 100%">
+                                    <div class="col-md-12 row">
+                                        <div class="col-xs-12">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-click="AgregarMantenimiento_Click();" style="width: 60px;" ng-disabled="FlagEditing==false">
+                                                <span class="boton1Span">
+                                                        <img class="boton1Img csBtnAgregar" alt="Agregar" src="/Images/formatmap32x32.png">
+                                                    </span>
+                                                <span class="boton1txt">Agregar</span>
+                                            </button>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ContentListadoddefbf3b-5f51-47b0-a9d0-54a4cf5fdf65" class="block_content">
+                                <div class="form_section" style="width: 100%">
+                                    <table id="listaActividades"></table>
+                                    <div id="pagerlistaActividades"></div>
+                                </div>
+                                <div class="caja11 msgerror ListaMantenimiento">
+                                    <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.ListaMantenimiento" data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                                 <div id="seccion-5">
                             <div style="display: none">0</div>
                             <div style="width: 100%; float: left">
                                 <div class="block_cab block_cab_active">
                                     <h2>
-                                        <span>Lista de Mantenimientos</span>
+                                        <span>Lista de Materiales</span>
                                     </h2>
                                     <h3></h3>
                                     <div class="acordeon">
@@ -317,10 +534,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="ContentListadoddefbf3b-5f51-47b0-a9d0-54a4cf5fdf65" class="block_content">
+                                <div id="ContentListadoddefbf3b-5f51-47b0-a9d0-54a4cf5fdf6w5" class="block_content">
                                     <div class="form_section" style="width: 100%">
-                                        <table id="listaMantenimientos"></table>
-                                        <div id="pagerlistaMantenimientos"></div>
+                                        <table id="listaMateriales"></table>
+                                    <div id="pagerlistaMateriales"></div>
                                     </div>
                                     <div class="caja11 msgerror ListaMantenimiento">
                                         <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.ListaMantenimiento" data-valmsg-replace="true"></span>
