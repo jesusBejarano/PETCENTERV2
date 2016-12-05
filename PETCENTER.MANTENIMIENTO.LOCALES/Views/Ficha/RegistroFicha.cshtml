@@ -3,91 +3,95 @@
 @*<script type="text/javascript" src="/Scripts/ControladorasAngular/controller-RECLA-AgregarMantenimiento.js"></script>*@
 <script type="text/javascript" src="~/Scripts/ControladorasAngular/controller-RECLA-BuscarMantenimiento.js"></script>
 <script type="text/javascript" src="/Scripts/ControladorasAngular/controller-RECLA-BuscarSolicitarMantenimiento.js"></script>
+<script type="text/javascript" src="~/Scripts/ControladorasAngular/controller-RECLA-BuscarActividades.js"></script>
+<script type="text/javascript" src="~/Scripts/ControladorasAngular/controller-RECLA-BuscarMateriales.js"></script>
 <div id="ContenedorBody" style="width: 100%; clear: both; position: static; zoom: 1;">
     <div>
         <div id="centroPagina" class="currentPageClass col-md-12 wrapper  wrapperMediano" style="padding-top: 0px !important; padding-bottom: 0px !important; border: 0px !important; position: relative">
             <div class="contenido clearfix ng-view ng-scope" style="border: 1px solid #0E75B5;">
                 <div class="block ng-scope" style="">
                     <div ng-app="api" ng-controller="RegistroFichaController" class="ng-scope">
-                        <div id="seccion-1">
+                    <div id="seccion-1">
                             <div class="block_menu">
-                                <div style="max-width: 100%; height: 100%">
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonGuardar">
-                                        <button id="btnGuardar" class="SeparatorLeft boton1Style boton1" style="">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnGuardar" alt="Guardar" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Guardar</span>
-                                        </button>
+                                <div>
+                                    <div style="max-width: 100%; height: 100%">
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonGuardar">
+                                            <button id="btnGuardar" class="SeparatorLeft boton1Style boton1" style="">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnGuardar" alt="Guardar" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Guardar</span>
+                                            </button>
 
-                                    </div>
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonCrear">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="Crear_Click();" style="">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnGuardar" alt="Crear" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Crear</span>
-                                        </button>
-                                    </div>
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonModificar">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="Modificar_Click();" style="">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnModificar" alt="Modificar" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Modificar</span>
-                                        </button>
-                                    </div>
+                                        </div>
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonCrear">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="Crear_Click();" style="">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnGuardar" alt="Crear" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Crear</span>
+                                            </button>
+                                        </div>
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonModificar">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="Modificar_Click();" style="">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnModificar" alt="Modificar" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Modificar</span>
+                                            </button>
+                                        </div>
 
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonAprobar">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="Aprobar_Click();" style="">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnAprobar" alt="Enviar" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Aprobar</span>
-                                        </button>
-                                    </div>
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonAprobar">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="Aprobar_Click();" style="">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnAprobar" alt="Enviar" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Aprobar</span>
+                                            </button>
+                                        </div>
 
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonEnviar">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="IniciarFlujo_Click();" style="">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnAceptar" alt="Enviar" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Enviar</span>
-                                        </button>
-                                    </div>
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonDescartar">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="Descartar_Click();" style="width: 60px!important;">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnCancelar" alt="Descartar" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Descartar</span>
-                                        </button>
-                                    </div>
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonEnviar">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="IniciarFlujo_Click();" style="">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnAceptar" alt="Enviar" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Enviar</span>
+                                            </button>
+                                        </div>
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonDescartar">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="Descartar_Click();" style="width: 60px!important;">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnCancelar" alt="Descartar" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Descartar</span>
+                                            </button>
+                                        </div>
 
-                                    <div class="boton ng-hide" ng-show="FlagMostrarBotonDeshabilitar">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="Deshabilitar_Click();" style="width: 65px!important;">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnCancelar" alt="Deshabilitar" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Deshabilitar</span>
-                                        </button>
-                                    </div>
-                                    <!--
-                                      <div class="boton ng-hide" ng-show="FlagMostrarBotonHistorial">
-                                          <button class="SeparatorLeft boton1Style boton1" ng-Click="Historial_Click();" style="">
-                                              <span class="boton1Span">
-                                                  <img class="boton1Img csBtnHistorial" alt="Historial" src="/bundles/d41d8cd98f00b204e9800998ecf8427e/faffabed-c58a-4d3d-94e3-5237ee4668c4/Images/formatmap32x32.png">
-                                              </span>
-                                              <span class="boton1txt">Historial</span>
-                                          </button>
-                                      </div> -->
-                                    <div class="boton">
-                                        <button class="SeparatorLeft boton1Style boton1" ng-Click="Salir_Click();" style="">
-                                            <span class="boton1Span">
-                                                <img class="boton1Img csBtnSalir" alt="Salir" src="/Images/formatmap32x32.png">
-                                            </span>
-                                            <span class="boton1txt">Salir</span>
-                                        </button>
+                                        <div class="boton ng-hide" ng-show="FlagMostrarBotonDeshabilitar">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="Deshabilitar_Click();" style="width: 65px!important;">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnCancelar" alt="Deshabilitar" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Deshabilitar</span>
+                                            </button>
+                                        </div>
+                                        <!--
+              <div class="boton ng-hide" ng-show="FlagMostrarBotonHistorial">
+                  <button class="SeparatorLeft boton1Style boton1" ng-Click="Historial_Click();" style="">
+                      <span class="boton1Span">
+                          <img class="boton1Img csBtnHistorial" alt="Historial" src="/bundles/d41d8cd98f00b204e9800998ecf8427e/faffabed-c58a-4d3d-94e3-5237ee4668c4/Images/formatmap32x32.png">
+                      </span>
+                      <span class="boton1txt">Historial</span>
+                  </button>
+              </div> -->
+                                        <div class="boton">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-Click="Salir_Click();" style="">
+                                                <span class="boton1Span">
+                                                    <img class="boton1Img csBtnSalir" alt="Salir" src="/Images/formatmap32x32.png">
+                                                </span>
+                                                <span class="boton1txt">Salir</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -159,11 +163,11 @@
                             <div class="col-md-6">
                                 <div class="col-md-12 row">
                                     <div class="col-md-4">
-                                        N° Solicitud Mantenimiento
+                                        N° Mantenimiento
                                     </div>
                                     <div class="col-md-8">
                                         <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
-                                               ng-model="$root.DatosFormulario.DatosFicha.NumeroSolicitud" disabled>
+                                               ng-model="$root.DatosFormulario.DatosFicha.NumeroMantenimiento" disabled>
 
                                         <input type="image" ng-disabled="FlagEditing==false"
                                                ng-click="BuscarMantenimiento_Click();" value="Buscar"
@@ -222,23 +226,11 @@
                                         Tipo Mantenimiento
                                     </div>
                                     <div class="col-md-8">
-                                        <select ng-model="$root.DatosFormulario.DatosFicha
-.CodigoTipoMantenimiento"
-                                                ng-options="tp.Codigo as tp.Descripcion for tp in $root.DatosFormulario.DatosFichaCargaInicial.TipoMantenimiento"
-                                                class="InputSELECT_01"
-                                                data-val="true"
-                                                data-val-required="Tipo Mantenimiento es requerido."
-                                                id="$root.DatosFormulario.DatosFicha
-.CodigoTipoMantenimiento"
-                                                name="$root.DatosFormulario.DatosFicha
-.CodigoTipoMantenimiento"
-                                                ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoTipoMantenimiento=='False' || FlagEditing==false"
-                                                required>
-                                            <option value="" class="">[Seleccione]</option>
-                                        </select>
-                                        <div class="caja11 msgerror CodigoTipoMantenimiento">
+                                        <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                               ng-model="$root.DatosFormulario.DatosFicha.TipoMantenimiento" disabled="" />
+                                        <div class="caja11 msgerror FechaSolicitud">
                                             <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
-.CodigoTipoMantenimiento" data-valmsg-replace="true"></span>
+.FechaSolicitud" data-valmsg-replace="true"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -249,24 +241,11 @@
                                         Sede
                                     </div>
                                     <div class="col-md-8">
-                                        <select ng-model="$root.DatosFormulario.DatosFicha
-.CodigoSede"
-                                                ng-options="sede.Codigo as sede.Descripcion for sede in $root.DatosFormulario.DatosFichaCargaInicial.Sede"
-                                                class="InputSELECT_01"
-                                                data-val="true"
-                                                data-val-required="Sede es requerido."
-                                                id="$root.DatosFormulario.DatosFicha
-.CodigoSede"
-                                                name="$root.DatosFormulario.DatosFicha
-.CodigoSede"
-                                                ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoSede=='False' || FlagEditing==false"
-                                                required>
-
-                                            <option value="" class="">[Seleccione]</option>
-                                        </select>
-                                        <div class="caja11 msgerror CodigoSede">
+                                        <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                               ng-model="$root.DatosFormulario.DatosFicha.Sede" disabled="" />
+                                        <div class="caja11 msgerror FechaSolicitud">
                                             <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
-.CodigoSede" data-valmsg-replace="true"></span>
+.FechaSolicitud" data-valmsg-replace="true"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -283,23 +262,11 @@
                                         Área
                                     </div>
                                     <div class="col-md-8">
-                                        <select ng-model="$root.DatosFormulario.DatosFicha
-.CodigoArea"
-                                                ng-options="area.Codigo as area.Descripcion for area in $root.DatosFormulario.DatosFichaCargaInicial.Area"
-                                                class="InputSELECT_01"
-                                                id="$root.DatosFormulario.DatosFicha
-.CodigoArea"
-                                                data-val="true"
-                                                data-val-required="Área es requerido."
-                                                name="$root.DatosFormulario.DatosFicha
-.CodigoArea"
-                                                ng-disabled="$root.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.HabilitadoArea=='False' || FlagEditing==false"
-                                                required>
-                                            <option value="" class="">[Seleccione]</option>
-                                        </select>
-                                        <div class="caja11 msgerror CodigoArea">
+                                        <input class="InputTEXT_05  ng-pristine ng-valid" maxlength="70" type="text" ng-enter="Enter()"
+                                               ng-model="$root.DatosFormulario.DatosFicha.Area" disabled="" />
+                                        <div class="caja11 msgerror FechaSolicitud">
                                             <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosFicha
-.CodigoArea" data-valmsg-replace="true"></span>
+.FechaSolicitud" data-valmsg-replace="true"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -468,7 +435,6 @@
 
                     </div>
                     </div>
-
                     <div id="seccion-4">
                         <div style="display: none">0</div>
                         <div style="width: 100%; float: left">
@@ -484,7 +450,7 @@
                                 <div style="max-width: 100%; height: 100%">
                                     <div class="col-md-12 row">
                                         <div class="col-xs-12">
-                                            <button class="SeparatorLeft boton1Style boton1" ng-click="AgregarMantenimiento_Click();" style="width: 60px;" ng-disabled="FlagEditing==false">
+                                            <button class="SeparatorLeft boton1Style boton1" ng-click="AgregarActividad_Click();" style="width: 60px;" ng-disabled="FlagEditing==false">
                                                 <span class="boton1Span">
                                                         <img class="boton1Img csBtnAgregar" alt="Agregar" src="/Images/formatmap32x32.png">
                                                     </span>
@@ -507,7 +473,7 @@
                             </div>
                         </div>
                     </div>
-                                 <div id="seccion-5">
+                    <div id="seccion-5">
                             <div style="display: none">0</div>
                             <div style="width: 100%; float: left">
                                 <div class="block_cab block_cab_active">
@@ -522,7 +488,7 @@
                                     <div style="max-width: 100%; height: 100%">
                                         <div class="col-md-12 row">
                                             <div class="col-xs-12">
-                                                <button class="SeparatorLeft boton1Style boton1" ng-click="AgregarMantenimiento_Click();" style="width: 60px;" ng-disabled="FlagEditing==false">
+                                                <button class="SeparatorLeft boton1Style boton1" ng-click="AgregarMateriales_Click();" style="width: 60px;" ng-disabled="FlagEditing==false">
                                                     <span class="boton1Span">
                                                         <img class="boton1Img csBtnAgregar" alt="Agregar" src="/Images/formatmap32x32.png">
                                                     </span>

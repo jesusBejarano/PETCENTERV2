@@ -87,12 +87,12 @@
                                 if (data) {
                                     FechaInicioDefault = data.FechaInicio;
                                     FechaFinDefault = data.FechaFin;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaInicio = FechaInicioDefault;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaFin = FechaFinDefault;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Estado = data.Estado;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.TipoMantenimiento = data.TipoMantenimiento;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Sede = data.Sede;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Area = data.Area;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaInicio = FechaInicioDefault;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaFin = FechaFinDefault;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.Estado = data.Estado;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.TipoMantenimiento = data.TipoMantenimiento;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.Sede = data.Sede;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.Area = data.Area;
                                 }
                             }
                         } );
@@ -110,8 +110,8 @@
                         var trf = $("#consultaSolicitudes tbody:first tr:first")[0];
                         $("#consultaSolicitudes tbody:first").empty().append(trf);
 
-                        var temFechaInicio = $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaInicio;
-                        var temFechaFin = $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaFin;
+                        var temFechaInicio = $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaInicio;
+                        var temFechaFin = $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaFin;
 
                         var fechaInicio = temFechaInicio.split(" ")[0].split("/");
                         var fechaFin = temFechaFin.split(" ")[0].split("/");
@@ -122,7 +122,7 @@
                        
                         //fechaFinFinal = '2016-11-29 17:15:45';
 
-                        var request = $rootScope.DatosFormulario.FiltrosBusquedaSolicitud;
+                        var request = $rootScope.DatosFormulario.FiltrosBusquedaFicha;
                         request.FechaInicioFinal = fechaInicioFinal;
                         request.FechaFinFinal = fechaFinFinal;
                         //var request = { "request": objRequest };
@@ -137,7 +137,7 @@
                             success: function (data) {
                                 if (data) {
                                     for (i = 0; i < data.ListaSolicitud.length; i++) {
-                                        jQuery("#consultaSolicitudes").jqGrid('addRowData', i + 1, data.ListaSolicitud[i]);
+                                        jQuery("#listaSolicitudMantenimiento").jqGrid('addRowData', i + 1, data.ListaSolicitud[i]);
                                     }
                                 }
                             }
@@ -153,17 +153,17 @@
                         window.location.href = 'http://' + window.location.host;
                     }
                     $scope.Limpiar_Click = function () {
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.CodigoSolicitud = null;
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.CodigoTipoMantenimiento = null;
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.Estado = null;
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.CodigoSede = null;
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.CodigoArea = null;
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaInicio = FechaInicioDefault;
-                        $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaFin = FechaFinDefault;                       
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.CodigoSolicitud = null;
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.CodigoTipoMantenimiento = null;
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.Estado = null;
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.CodigoSede = null;
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.CodigoArea = null;
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaInicio = FechaInicioDefault;
+                        $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaFin = FechaFinDefault;                       
                     };
 
                     $scope.ListarSedeByNegocio = function () {
-                        var param =$rootScope.DatosFormulario.FiltrosBusquedaSolicitud.CodigoNegocio;
+                        var param =$rootScope.DatosFormulario.FiltrosBusquedaFicha.CodigoNegocio;
                         $.ajax ( {
                             url: "/Reclamos/ListarSedeByNegocio",
                             type: "POST",
@@ -176,7 +176,7 @@
                                 $rootScope.DatosFormulario.FiltrosBusquedaReclamosCargaInicial.HabilitadoSede = 'True';
                                 $rootScope.DatosFormulario.FiltrosBusquedaReclamosCargaInicial.Sede = data.Sede;
                                 if ( data.Sede.length > 0) {
-                                       $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.CodigoSede = $rootScope.DatosFormulario.FiltrosBusquedaReclamosCargaInicial.Sede[0].CodigoSede
+                                       $rootScope.DatosFormulario.FiltrosBusquedaFicha.CodigoSede = $rootScope.DatosFormulario.FiltrosBusquedaReclamosCargaInicial.Sede[0].CodigoSede
                                       if (data.Sede.length == 1) {
                                           $rootScope.DatosFormulario.FiltrosBusquedaReclamosCargaInicial.HabilitadoSede = 'False';
                                           $(".caja11.msgerror.CodigoSede").html("");
@@ -239,33 +239,22 @@
 
                   
 
-                    jQuery("#consultaSolicitudes").jqGrid({
+                    jQuery("#listaSolicitudMantenimiento").jqGrid({
                         //url: 'ObtenerSolicitudes',
                         datatype: "local",
-                        colNames: ['Código', 'Estado', 'Fecha Creación', 'Tipo Mantenimiento', 'Sede', 'Área', 'Editar'],
+                        colNames: ['Código', 'Descripción','Fecha Creación', 'Tipo Mantenimiento', 'Sede', 'Área'],
                         colModel: [
-                            { name: 'Codigo', index: 'Codigo', width: 220, align: "center", sortable: false},
-                            { name: 'Estado', index: 'Estado', width: 220, align: "center", sortable: false },
+                            { name: 'Codigo', index: 'Codigo', width: 220, align: "center", sortable: false },
+                            { name: 'Descripcion', index: 'Descripcion', width: 220, align: "center", sortable: false },
                             { name: 'FechaHoraCreacion', index: 'FechaHoraCreacion', width: 220, align: "center", sortable: false },
                             { name: 'TipoMantenimiento', index: 'TipoMantenimiento', width: 220, align: "center", sortable: false },
                             { name: 'Sede', index: 'Sede', width: 220, align: "center", sortable: false },
-                            { name: 'Area', index: 'Area', width: 220, sortable: false, align: "center", },
-                           {
-                               name: 'Editar',
-                               align: 'center',
-                               sortable: false,
-                               width: 230,
-                               formatter: function (cellvalue, options, rowObject) {
-                                   return "<div style='width:100%;padding-left:10px'>" +
-                                     "<a style='cursor:pointer;width:100%'>" +
-                                     "<button title='Imprimir' onclick='Editar(" + rowObject.Codigo + ")'  class='boton1Style botonpequenio'>" +
-                                     "<img width='16' height='16' src='/Images/editar.png'></button></a></div>";
-                               }
-                           }
+                            { name: 'Area', index: 'Area', width: 220, sortable: false, align: "center", }
+                           
                         ],
                         rowNum: 10,
                         rowList: [10, 20, 30],
-                        pager: '#pagerconsultaSolicitudes',
+                        pager: '#pagerlistaSolicitudMantenimiento',
                         //sortname: 'Codigo',
                         shrinkToFit: false,
                         autowidth: true,
@@ -273,7 +262,7 @@
                         viewrecords: true//,
                         //sortorder: "desc"
                     });
-                    jQuery("#consultaSolicitudes").jqGrid('navGrid', '#pagerconsultaSolicitudes', { edit: false, add: false, del: false });
+                    jQuery("#listaSolicitudMantenimiento").jqGrid('navGrid', '#pagerlistaSolicitudMantenimiento', { edit: false, add: false, del: false });
                    
 
                     //$scope.compilarGrilla = function(Id) {

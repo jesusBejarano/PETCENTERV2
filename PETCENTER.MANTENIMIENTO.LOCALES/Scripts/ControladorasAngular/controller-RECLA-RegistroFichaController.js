@@ -398,6 +398,53 @@
                     };
 
 
+                    $scope.AgregarActividad_Click = function () {
+                        var altura = 800;
+                        getPopupResponsive({
+                            formURL: "BuscarActividad",
+                            title: "Buscar Actividad",
+                            nombreDiv: "divPopupBuscarActividad",
+                            nombreGrid: "",
+                            width: "800px",
+                            height: altura,
+                            params: {},
+                            HideSelection: true,
+                            multiSelect: false,
+                            select: function (row) {
+                                return true;
+                            },
+                            beforeShow: function (obj) {
+
+                                $rootScope.hashPopup = $(obj).attr("mapurl");
+                                $compile($("#divPopupBuscarActividad"))($scope);
+                            }
+                        });
+                    }; 
+
+                    $scope.AgregarMateriales_Click = function () {
+                        var altura = 800;
+                        getPopupResponsive({
+                            formURL: "BuscarMateriales",
+                            title: "Buscar Materiales",
+                            nombreDiv: "divPopupBuscarMateriales",
+                            nombreGrid: "",
+                            width: "800px",
+                            height: altura,
+                            params: {},
+                            HideSelection: true,
+                            multiSelect: false,
+                            select: function (row) {
+                                return true;
+                            },
+                            beforeShow: function (obj) {
+
+                                $rootScope.hashPopup = $(obj).attr("mapurl");
+                                $compile($("#divPopupBuscarMateriales"))($scope);
+                            }
+                        });
+                    }; 
+
+
                     jQuery("#listaActividades").jqGrid({
 
                         datatype: "local",

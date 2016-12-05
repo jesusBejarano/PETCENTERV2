@@ -106,6 +106,154 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Agente.BL
             return lstFicha;
         }
 
+        public List<ConsultaMantenimientoModel> BusquedaMantenimiento(ConsultaMantenimientoRequestViewModel request)
+        {
+
+            this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", "demo", Environment.NewLine));
+
+            this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", request.FechaInicio.ToShortDateString(), Environment.NewLine));
+            this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", request.FechaFin.ToShortDateString(), Environment.NewLine));
+            var lstFicha = new List<ConsultaMantenimientoModel>();
+            try
+            {
+                var requestdDto = new ConsultarMantenimientoRequestDTO();
+                requestdDto.CantidadPaginas = 1;
+                requestdDto.NroRegistrosPorPagina = 100;
+                requestdDto.PaginaActual = 1;
+                requestdDto.TotalRegistros = 100;
+
+                requestdDto.CodigoSolicitud = request.CodigoSolicitud;
+                requestdDto.DescripcionSolicitud = request.DescripcionSolicitud;
+                requestdDto.DescripcionMantenimiento = request.DescripcionMantenimiento;
+                requestdDto.CodigoTipoMantenimiento = request.CodigoTipoMantenimiento;
+                requestdDto.FechaInicio = request.FechaInicio;
+                requestdDto.FechaFin = request.FechaFin;
+                requestdDto.CodigoSede = request.CodigoSede;
+                requestdDto.CodigoArea = request.CodigoArea;
+
+                var responseMantenimiento = new FichaProxyrest().ConsultarMantenimiento (requestdDto);
+
+                foreach (var item in responseMantenimiento.MantenimientoList )
+                {
+                    var demo = new ConsultaMantenimientoModel
+
+                    {
+
+                             Area = item.DescripcionAreaMantenimiento ,
+                            Descripcion = item.DescripcionMantenimiento ,
+                            Codigo = item.CodigoMantenimiento ,
+                            //Estado = item.descr,
+                            FechaHoraCreacion = string.Format("{0:dd/MM/yyyy}", item.FechaHoraCreacion),//item.FechaHoraCreacion.ToShortDateString(),
+                            Sede = item.DescripcionSedeMantenimiento,
+                            TipoMantenimiento = item.DescripcionTipoMantenimiento
+                    };
+                    lstFicha.Add(demo);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
+            }
+
+
+            return lstFicha;
+        }
+
+        public List<ConsultaActividadModel> BusquedaActividad(ConsultaActividadRequestViewModel request)
+        {
+
+            this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", "demo", Environment.NewLine));
+
+            //this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", request..ToShortDateString(), Environment.NewLine));
+            //this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", request.FechaFin.ToShortDateString(), Environment.NewLine));
+            var lstActividad = new List<ConsultaActividadModel>();
+            try
+            {
+                var requestdDto = new ConsultarActividadRequestDTO();
+              
+                requestdDto.DescripcionActividad = request.Descripcion ;
+
+                var responseActividad = new FichaProxyrest().ConsultarActividad (requestdDto);
+
+                foreach (var item in responseActividad.ActividadList)
+                {
+                    var demo = new ConsultaActividadModel
+
+                    {
+        Codigo=item.CodigoActividad   ,
+        Descripcion=item.Nombre  
+
+        //Area = item.DescripcionAreaMantenimiento,
+        //Descripcion = item.DescripcionMantenimiento,
+        //Codigo = item.CodigoMantenimiento,
+        ////Estado = item.descr,
+        //FechaHoraCreacion = string.Format("{0:dd/MM/yyyy}", item.FechaHoraCreacion),//item.FechaHoraCreacion.ToShortDateString(),
+        //Sede = item.DescripcionSedeMantenimiento,
+        //TipoMantenimiento = item.DescripcionTipoMantenimiento
+    };
+                    lstActividad.Add(demo);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
+            }
+
+
+            return lstActividad;
+        }
+
+        public List<ConsultaMaterialModel> BusquedaMaterial(ConsultaMaterialRequestViewModel request)
+        {
+
+            this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", "demo", Environment.NewLine));
+
+            //this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", request..ToShortDateString(), Environment.NewLine));
+            //this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", request.FechaFin.ToShortDateString(), Environment.NewLine));
+            var lstMaterial = new List<ConsultaMaterialModel>();
+            try
+            {
+                var requestdDto = new ConsultarMaterialesRequestDTO();
+
+                requestdDto.DescripcionMaterial  = request.DescripcionMaterial ;
+
+                var responseMaterial = new FichaProxyrest().ConsultarMaterial (requestdDto);
+
+                foreach (var item in responseMaterial.MaterialList  )
+                {
+                    var demo = new ConsultaMaterialModel
+
+                    {
+                        Codigo = item.CodigoMaterial,
+                        Descripcion = item.Nombre
+
+                        //Area = item.DescripcionAreaMantenimiento,
+                        //Descripcion = item.DescripcionMantenimiento,
+                        //Codigo = item.CodigoMantenimiento,
+                        ////Estado = item.descr,
+                        //FechaHoraCreacion = string.Format("{0:dd/MM/yyyy}", item.FechaHoraCreacion),//item.FechaHoraCreacion.ToShortDateString(),
+                        //Sede = item.DescripcionSedeMantenimiento,
+                        //TipoMantenimiento = item.DescripcionTipoMantenimiento
+                    };
+                    lstMaterial.Add(demo);
+                }
+            }
+            catch (Exception ex)
+            {
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
+                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
+            }
+
+
+            return lstMaterial;
+        }
+
+
         public DetalleFicha ObtenerDetalleFicha(int codigoFicha)
         {
             var requestDto = new ObtenerFichaRequestDTO();

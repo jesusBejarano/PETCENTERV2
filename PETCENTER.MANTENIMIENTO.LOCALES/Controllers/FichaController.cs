@@ -135,5 +135,51 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Controllers
 
             return View();
         }
+
+        public ActionResult ObtenerMantenimientos(ConsultaMantenimientoRequestViewModel request)
+        {
+            ActionResult actionResult = null;
+
+
+            var responseViewModel = new ResponseBusquedaMantenimientoViewModel();
+            responseViewModel.ListaMantenimiento  = new FichaAgente().BusquedaMantenimiento (request);
+            //var listaRespuesta = responseViewModel;
+            //var totalPages = int.Parse("" + Math.Ceiling(Convert.ToDouble(listaRespuesta.TotalRegistros)/10));
+            //var res = Grid.toJSONFormat2(listaRespuesta.ListaSolicitud, 1, listaRespuesta.TotalRegistros, totalPages,
+            //    "Codigo");
+            actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
+            return actionResult;
+        }
+
+        public ActionResult ObtenerActividades(ConsultaActividadRequestViewModel request)
+        {
+            ActionResult actionResult = null;
+
+
+            var responseViewModel = new ResponseBusquedaActividadViewModel();
+            responseViewModel.ListaActividad = new FichaAgente().BusquedaActividad (request);
+            //var listaRespuesta = responseViewModel;
+            //var totalPages = int.Parse("" + Math.Ceiling(Convert.ToDouble(listaRespuesta.TotalRegistros)/10));
+            //var res = Grid.toJSONFormat2(listaRespuesta.ListaSolicitud, 1, listaRespuesta.TotalRegistros, totalPages,
+            //    "Codigo");
+            actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
+            return actionResult;
+        }
+
+        public ActionResult ObtenerMateriales(ConsultaMaterialRequestViewModel request)
+        {
+            ActionResult actionResult = null;
+
+
+            var responseViewModel = new ResponseBusquedaMaterialViewModel();
+            responseViewModel.ListaMaterial  = new FichaAgente().BusquedaMaterial (request);
+            //var listaRespuesta = responseViewModel;
+            //var totalPages = int.Parse("" + Math.Ceiling(Convert.ToDouble(listaRespuesta.TotalRegistros)/10));
+            //var res = Grid.toJSONFormat2(listaRespuesta.ListaSolicitud, 1, listaRespuesta.TotalRegistros, totalPages,
+            //    "Codigo");
+            actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
+            return actionResult;
+        }
+
     }
 }

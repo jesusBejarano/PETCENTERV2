@@ -1,6 +1,6 @@
 (function () {
     angular.module ( 'api' )
-        .controller('BuscarMantenimientoController',
+        .controller('BuscarActividadesFichaController',
             ['$scope', '$http', '$routeParams', '$timeout', 'Enum', 'ParseHtml', '$rootScope', 'Helpers', 'ServiciosConector', '$compile',
                 function ($scope, $http, $routeParams, $timeout, Enum, ParseHtml, $rootScope, Helpers, ServiciosConector, $compile) {
                     
@@ -11,8 +11,10 @@
                             $rootScope.DatosFormulario = {};
                         if ($rootScope.DatosFormulario.DatosMantenimiento == undefined)
                             $rootScope.DatosFormulario.DatosMantenimiento = {};
+                        if ($rootScope.DatosFormulario.DatosActividad == undefined)
+                            $rootScope.DatosFormulario.DatosActividad = {};
 
-                        $rootScope.DatosFormulario.DatosMantenimiento = {};
+                        $rootScope.DatosFormulario.DatosActividad = {};
                     } );
 
                     function obtenerUltimoCodigo() {
@@ -26,7 +28,6 @@
                         }
                         return codigo;
                     }
-
                     $scope.Buscar_Click = function () {
                         //  $scope.compilarGrilla("#consultaSolicitudes");
 
@@ -34,30 +35,15 @@
                             return false;
                         }
 
-                        if (validateForm("#BuscarSolicitudMantenimientoFrm") == false) {
+                        if (validateForm("#BuscarActividadMantenimientoFrm") == false) {
                             return false;
                         }
-                        var trf = $("#listaSolicitudMantenimiento tbody:first tr:first")[0];
-                        $("#listaSolicitudMantenimiento tbody:first").empty().append(trf);
+                        var trf = $("#listaActividadMantenimiento tbody:first tr:first")[0];
+                        $("#listaActividadMantenimiento tbody:first").empty().append(trf);
 
-                        var temFechaInicio = $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaInicio;
-                        var temFechaFin = $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaFin;
-
-                        var fechaInicio = temFechaInicio.split(" ")[0].split("/");
-                        var fechaFin = temFechaFin.split(" ")[0].split("/");
-
-
-                        var fechaInicioFinal = fechaInicio[2] + '-' + fechaInicio[1] + '-' + fechaInicio[0] + ' 23:59:45';
-                        var fechaFinFinal = fechaFin[2] + '-' + fechaFin[1] + '-' + fechaFin[0] + ' 23:59:45';
-
-                        //fechaFinFinal = '2016-11-29 17:15:45';
-
-                        var request = $rootScope.DatosFormulario.FiltrosBusquedaFicha;
-                        request.FechaInicioFinal = fechaInicioFinal;
-                        request.FechaFinFinal = fechaFinFinal;
-                        //var request = { "request": objRequest };
+                        var request = $rootScope.DatosFormulario.DatosActividad;
                         $.ajax({
-                            url: "ObtenerMantenimientos",
+                            url: "ObtenerActividades",
                             type: "POST",
                             headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
                             data: request,
@@ -66,8 +52,8 @@
                             async: false,
                             success: function (data) {
                                 if (data) {
-                                    for (i = 0; i < data.ListaFicha.length; i++) {
-                                        jQuery("#consultaFichas").jqGrid('addRowData', i + 1, data.ListaFicha[i]);
+                                    for (i = 0; i < data.ListaActividad.length; i++) {
+                                        jQuery("#listaActividadMantenimiento").jqGrid('addRowData', i + 1, data.ListaActividad[i]);
                                     }
                                 }
                             }
@@ -75,20 +61,49 @@
 
                         return false;
                     };
+                    //$scope.Buscar_Click = function () {
+                    //    var objSolicitudMantenimiento = {};
+                    //    objSolicitudMantenimiento.NumeroSolicitud = "43";
+                    //    objSolicitudMantenimiento.Descripcion = "Prueba";
+                    //    objSolicitudMantenimiento.Fecha = "10/11/2017";
+                    //    objSolicitudMantenimiento.Sede = "San Miguel";
+                    //    objSolicitudMantenimiento.Area = "Limpieza";
+                    //    objSolicitudMantenimiento.Solicitante = "Jesus";
 
-                    $scope.Guardar_Click = function () {
-                        var validacion = validacionesCamposGuardar();
-                        if (validacion === false) {
-                            return false;
-                        }
-                        var objMantenimiento = {};
-                        objMantenimiento.Codigo = obtenerUltimoCodigo();
-                        objMantenimiento.Nombre = $rootScope.DatosFormulario.DatosMantenimiento.Nombre;
-                        objMantenimiento.FechaMantenimiento = $rootScope.DatosFormulario.DatosMantenimiento.FechaMantenimiento;
-                        objMantenimiento.Descripcion = $rootScope.DatosFormulario.DatosMantenimiento.Descripcion;
+                    //    jQuery("#listaSolicitudMantenimiento").jqGrid('addRowData', i + 1, objSolicitudMantenimiento);
+                     
+                    //};
 
-                        jQuery("#listaMantenimientos").jqGrid('addRowData', i + 1, objMantenimiento);
+
+                    $scope.Seleccionar_Click = function () {
+
+                        //var validacion = validacionesCamposGuardar();
+                        //if (validacion === false) {
+                        //    return false;
+                        //}
+                        //pasando de del fomulario al objeto
+                        var myGrid = $('#listaActividadMantenimiento'),
+                     selRowId = myGrid.jqGrid('getGridParam', 'selrow'),
+                     celValue_Codigo = myGrid.jqGrid('getCell', selRowId, 'Codigo'),
+                        celValue_Descripcion = myGrid.jqGrid('getCell', selRowId, 'Descripcion');
+
+
+                        var objActividad = {};
+                        objActividad.Codigo = celValue_Codigo;
+                        objActividad.Descripcion = celValue_Descripcion;
+
+                        jQuery("#listaActividades").jqGrid('addRowData', i + 1, objActividad);
+
                         $scope.$parent.SalirPopup_Click();
+
+
+                       
+                        //var myGrid = $('#listaSolicitudMantenimiento'),
+                        //selRowId = myGrid.jqGrid('getGridParam', 'selrow'),
+                        //celValue = myGrid.jqGrid('getCell', selRowId, 'NumeroSolicitud');
+                        //$rootScope.DatosFormulario.DatosFicha.NumeroSolicitud = celValue;
+                        //$scope.$parent.SalirPopup_Click();
+
                     };
                     function validacionesCamposGuardar() {
                         limpiarControlesValidacionEspeciales();
@@ -119,5 +134,17 @@
                     function Eliminar(codigoMantenimiento) {
                         alert("eliminar");
                     }
+
+                    jQuery("#listaActividadMantenimiento").jqGrid({
+
+                        datatype: "local",
+                        colNames: ['Código', 'Descripción'],
+                        colModel: [
+                            { name: 'Codigo', index: 'Codigo', width: 80, align: "center" },
+                         { name: 'Descripcion', index: 'Descripcion', width: 120, align: "center" }
+                        ],
+                        shrinkToFit: false,
+                        autowidth: true
+                    });
                 }] );
 }) ();

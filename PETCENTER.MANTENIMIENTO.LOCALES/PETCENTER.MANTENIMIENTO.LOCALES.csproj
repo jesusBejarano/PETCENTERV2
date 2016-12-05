@@ -164,12 +164,19 @@
   <ItemGroup>
     <Compile Include="Agente\BL\FichaAgente.cs" />
     <Compile Include="Agente\BL\SolicitudAgente.cs" />
+    <Compile Include="Agente\DTO\ActividadDTO.cs" />
     <Compile Include="Agente\DTO\AreaDTO.cs" />
+    <Compile Include="Agente\DTO\ConsultarActividadRequestDTO.cs" />
+    <Compile Include="Agente\DTO\ConsultarActividadResponseDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarAreaResponseDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarEstadoFichaMantenimientoResponseDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarEstadoSolicitudResponseDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarFichaRequestDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarFichaResponseDTO.cs" />
+    <Compile Include="Agente\DTO\ConsultarMantenimientoRequestDTO.cs" />
+    <Compile Include="Agente\DTO\ConsultarMantenimientoResponseDTO.cs" />
+    <Compile Include="Agente\DTO\ConsultarMaterialesRequestDTO.cs" />
+    <Compile Include="Agente\DTO\ConsultarMaterialResponseDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarSedeResponseDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarSolicitudRequestDTO.cs" />
     <Compile Include="Agente\DTO\ConsultarSolicitudResponseDTO.cs" />
@@ -179,6 +186,7 @@
     <Compile Include="Agente\DTO\FichaDTO.cs" />
     <Compile Include="Agente\DTO\MantenimientoDTO.cs" />
     <Compile Include="Agente\DTO\MantenimientoListDTO.cs" />
+    <Compile Include="Agente\DTO\MaterialDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerFichaRequestDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerFichaResponseDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerSolicitudRequestDTO.cs" />
@@ -301,8 +309,10 @@
     <Content Include="Scripts\ControladorasAngular\controller-homepagecontroller.js" />
     <Content Include="Scripts\ControladorasAngular\controller-layoutcontroller.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-AgregarMantenimiento.js" />
+    <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarActividades.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarFichas.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarMantenimiento.js" />
+    <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarMateriales.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-BuscarSolicutudesjs.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-RegistroFichaController.js" />
     <Content Include="Scripts\ControladorasAngular\controller-RECLA-RegistroSolicitudController.js" />

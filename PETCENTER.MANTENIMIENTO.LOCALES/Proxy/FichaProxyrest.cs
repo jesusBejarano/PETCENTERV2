@@ -19,7 +19,34 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Proxy
 
             return response;
         }
+        public ConsultarMantenimientoResponseDTO ConsultarMantenimiento(ConsultarMantenimientoRequestDTO request)
+        {
+            var url = ConfigurationManager.AppSettings["UrlConsultarMantenimiento"];
+            var response = DeserializarJSON<ConsultarMantenimientoRequestDTO, ConsultarMantenimientoResponseDTO>(request, url);
+            if (response == null)
+                throw new Exception(string.Format("Problemas con el servicio: {0}", url));
 
+            return response;
+        }
+
+        public ConsultarActividadResponseDTO ConsultarActividad(ConsultarActividadRequestDTO request)
+        {
+            var url = ConfigurationManager.AppSettings["UrlConsultarActividad"];
+            var response = DeserializarJSON<ConsultarActividadRequestDTO, ConsultarActividadResponseDTO>(request, url);
+            if (response == null)
+                throw new Exception(string.Format("Problemas con el servicio: {0}", url));
+
+            return response;
+        }
+        public ConsultarMaterialResponseDTO ConsultarMaterial(ConsultarMaterialesRequestDTO request)
+        {
+            var url = ConfigurationManager.AppSettings["UrlConsultarMateriales"];
+            var response = DeserializarJSON<ConsultarMaterialesRequestDTO, ConsultarMaterialResponseDTO>(request, url);
+            if (response == null)
+                throw new Exception(string.Format("Problemas con el servicio: {0}", url));
+
+            return response;
+        }
         public RegistrarFichaResponseDTO RegistrarFicha(RegistrarFichaRequestDTO request)
         {
             var url = ConfigurationManager.AppSettings["UrlRegistrarFicha"];

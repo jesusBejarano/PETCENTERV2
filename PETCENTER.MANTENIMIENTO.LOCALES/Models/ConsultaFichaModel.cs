@@ -17,6 +17,27 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Models
         public string Sede { get; set; }
         public string Area { get; set; }
     }
+    public class ConsultaMantenimientoModel
+    {
+        public int Codigo { get; set; }
+        public string Descripcion { get; set; }
+        public string Estado { get; set; }
+        public string FechaHoraCreacion { get; set; }
+        public string TipoMantenimiento { get; set; }
+        public string Sede { get; set; }
+        public string Area { get; set; }
+    }
+
+    public class ConsultaActividadModel
+    {
+        public int Codigo { get; set; }
+        public string Descripcion { get; set; }
+    }
+    public class ConsultaMaterialModel
+    {
+        public int Codigo { get; set; }
+        public string Descripcion { get; set; }
+    }
 
     public class RequestBusquedaFichaViewModel
     {
@@ -58,6 +79,51 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Models
         public ResponseBusquedaFichaViewModel()
         {
             ListaFicha = new List<ConsultaFichaModel>();
+            this.Result = new Result();
+        }
+    }
+    public class ResponseBusquedaMantenimientoViewModel
+    {
+        public List<ConsultaMantenimientoModel> ListaMantenimiento { get; set; }
+        public int TotalRegistros { get; set; }
+        public int CantidadPaginas { get; set; }
+        public int NroPagina { get; set; }
+        public Result Result { get; set; }
+
+        public ResponseBusquedaMantenimientoViewModel()
+        {
+            ListaMantenimiento = new List<ConsultaMantenimientoModel>();
+            this.Result = new Result();
+        }
+    }
+
+
+    public class ResponseBusquedaActividadViewModel
+    {
+        public List<ConsultaActividadModel> ListaActividad{ get; set; }
+        public int TotalRegistros { get; set; }
+        public int CantidadPaginas { get; set; }
+        public int NroPagina { get; set; }
+        public Result Result { get; set; }
+
+        public ResponseBusquedaActividadViewModel()
+        {
+            ListaActividad = new List<ConsultaActividadModel>();
+            this.Result = new Result();
+        }
+    }
+
+    public class ResponseBusquedaMaterialViewModel
+    {
+        public List<ConsultaMaterialModel> ListaMaterial { get; set; }
+        public int TotalRegistros { get; set; }
+        public int CantidadPaginas { get; set; }
+        public int NroPagina { get; set; }
+        public Result Result { get; set; }
+
+        public ResponseBusquedaMaterialViewModel()
+        {
+            ListaMaterial = new List<ConsultaMaterialModel>();
             this.Result = new Result();
         }
     }

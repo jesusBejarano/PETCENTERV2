@@ -1,5 +1,108 @@
-﻿@{
-    ViewBag.Title = "BuscarActividad";
+﻿
+@{
+    Layout = null;
 }
+<div class="block" style="min-height: 500px;">
+    <div ng-app="api" ng-controller="BuscarActividadesFichaController" class="ng-scope">
+        <div id="seccion-1">
+            <div class="block_menu">
+                <div style="max-width: 100%; height: 100%">
+                    <div class="boton" ng-show="FlagMostrarBotonGuardar">
+                        <button class="SeparatorLeft boton1Style boton1" ng-click="Buscar_Click();" style="">
+                            <span class="boton1Span">
+                                <img class="boton1Img csBtnBuscar" alt="Guardar" src="/Images/formatmap32x32.png">
+                            </span>
+                            <span class="boton1txt">Buscar</span>
+                        </button>
+                    </div>
+                    <div class="boton">
+                        <button class="SeparatorLeft boton1Style boton1" ng-click="Seleccionar_Click();" style="width: 65px!important;">
+                            <span class="boton1Span">
+                                <img class="boton1Img csBtnAceptar" alt="Seleccionar" src="/Images/formatmap32x32.png">
+                            </span>
+                            <span class="boton1txt">Seleccionar</span>
+                        </button>
+                    </div>
+                    <div class="boton">
+                        <button class="SeparatorLeft boton1Style boton1" ng-click="Salir_Click();" style="">
+                            <span class="boton1Span">
+                                <img class="boton1Img csBtnSalir" alt="Salir" src="/Images/formatmap32x32.png">
+                            </span>
+                            <span class="boton1txt">Salir</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="seccion-2">
+            <div>
+                <div class="block_cab block_cab_active">
+                    <h2>
+                        <span>Datos Actividad</span>
+                    </h2>
+                    <h3></h3>
+                    <div class="acordeon">
+                    </div>
+                </div>
+                <form id="BuscarActividadMantenimientoFrm" name="BuscarActividadMantenimientoFrm" class="ng-pristine ng-invalid ng-invalid-required">
+                    <div class="block_content" style="width: 100%">
+                        <!------------------- 1 Seccion -------------------------------------------->
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-4">
+                                            Descripción
+                                        </div>
+                                        <div class="col-md-8">
+                                            <input class="InputTEXT_05"
+                                                   maxlength="70"
+                                                   type="text"
+                                                   ng-enter="Enter()"
+                                                   ng-model="$root.DatosFormulario.DatosActividad.Descripcion"
+                                                   data-bind="value: $root.DatosFormulario.DatosActividad.Descripcion"
+                                                   data-val="true"
+                                                   data-val-required="Nombre es requerido."
+                                                   id="$root.DatosFormulario.DatosActividad.Descripcion"
+                                                   name="$root.DatosFormulario.DatosActividad.Descripcion"
+                                                   ng-disabled="FlagEditing==false">
+                                            <div class="caja11 msgerror Nombre">
+                                                <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosActividad.Nombre" data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-<h2>BuscarActividad</h2>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="seccion-5">
+            <div style="display: none">0</div>
+            <div style="width: 100%; float: left">
+                <div class="block_cab block_cab_active">
+                    <h2>
+                        <span>Resultado Búsqueda</span>
+                    </h2>
+                    <h3></h3>
+                    <div class="acordeon">
+                    </div>
+                </div>
+
+                <div id="ContentListadoddefbf3b-5f51-47b0-a9d0-54a4cfdsd5fdf6w5" class="block_content">
+                    <div class="form_section" style="width: 100%">
+                        <table id="listaActividadMantenimiento"></table>
+                        <div id="pagerlistaActividadMantenimiento"></div>
+                    </div>
+                    <div class="caja11 msgerror ListaMantenimiento">
+                        <span class="field-validation-valid msgerror" data-valmsg-for="$root.DatosFormulario.DatosSolicitud.ListaMantenimiento" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
