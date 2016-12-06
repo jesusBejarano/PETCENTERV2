@@ -47,20 +47,20 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Proxy
 
             return response;
         }
-        public RegistrarFichaResponseDTO RegistrarFicha(RegistrarFichaRequestDTO request)
+        public RegistrarFichaMantenimientoResponseDTO RegistrarFicha(RegistrarFichaMantenimientoRequestDTO request)
         {
-            var url = ConfigurationManager.AppSettings["UrlRegistrarFicha"];
-            var response = DeserializarJSON<RegistrarFichaRequestDTO, RegistrarFichaResponseDTO>(request, url);
+            var url = ConfigurationManager.AppSettings["UrlRegistrarFichaMantenimiento"];
+            var response = DeserializarJSON<RegistrarFichaMantenimientoRequestDTO, RegistrarFichaMantenimientoResponseDTO>(request, url);
             if (response == null)
                 throw new Exception(string.Format("Problemas con el servicio: {0}", url));
 
             return response;
         }
 
-        public ObtenerFichaResponseDTO ObtenerFicha(ObtenerFichaRequestDTO request)
+        public ObtenerFichaMantenimientoResponseDTO ObtenerFicha(ObtenerFichaMantenimientoRequestDTO request)
         {
             var url = ConfigurationManager.AppSettings["UrlObtenerFicha"];
-            var response = DeserializarJSON<ObtenerFichaRequestDTO, ObtenerFichaResponseDTO>(request, url);
+            var response = DeserializarJSON<ObtenerFichaMantenimientoRequestDTO, ObtenerFichaMantenimientoResponseDTO>(request, url);
             if (response == null)
                 throw new Exception(string.Format("Problemas con el servicio: {0}", url));
 

@@ -254,67 +254,46 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Agente.BL
         }
 
 
-        public DetalleFicha ObtenerDetalleFicha(int codigoFicha)
+        public ObtenerFichaMantenimientoResponseDTO ObtenerDetalleFicha(int codigoFicha)
         {
-            var requestDto = new ObtenerFichaRequestDTO();
-            requestDto.CodigoSolicitud = codigoFicha;
+            var requestDto = new ObtenerFichaMantenimientoRequestDTO();
+            requestDto.CodigoFichaMantenimiento = codigoFicha;
             var responseDetalleFicha = new FichaProxyrest().ObtenerFicha(requestDto);
 
-            var resultado = new DetalleFicha();
-            resultado.Descripcion = responseDetalleFicha.DescripcionSolicitud;
-            resultado.CodigoArea = responseDetalleFicha.CodigoArea.ToString();
-            resultado.CodigoSede = responseDetalleFicha.CodigoSede.ToString();
-            resultado.CodigoTipoMantenimiento = responseDetalleFicha.CodigoTipoMantenimiento.ToString();
-            resultado.FechaSolicitud = string.Format("{0:dd/MM/yyyy}", responseDetalleFicha.FechaSolicitud); //responseDetalleSolicitud.FechaSolicitud.ToShortDateString();
-            resultado.NumeroSolicitud = responseDetalleFicha.CodigoSolicitud;
-
-            foreach (var item in responseDetalleFicha.ListaMantenimientos)
-            {
-                resultado.ListaMantenimiento.Add(new MantenimientoViewModel
-                {
-                    Codigo = item.CodigoMantenimiento.ToString(),
-                    Descripcion = item.Descripcion,
-                    Nombre = item.Nombre,
-                    FechaMantenimiento = item.Fecha.ToShortDateString()
-                });
-            }
-            return resultado;
+           
+            return responseDetalleFicha;
         }
-        public RegistrarFichaResponseViewModel RegistrarFicha(RegistrarFicha request)
+        public RegistrarFichaResponseViewModel RegistrarFicha(string NumeroMantenimiento, string DescripcionFicha, string NumeroTecnicos, string Accion, string CodigoFichaMantenimiento)
         {
             var resultado = new RegistrarFichaResponseViewModel();
             try
             {
-                var requestDto = new RegistrarFichaRequestDTO();
+                var requestDto = new RegistrarFichaMantenimientoRequestDTO();
                 requestDto.Accion = "I";
-                requestDto.Descripcion = request.Descripcion;
-                requestDto.CodigoArea = int.Parse(request.CodigoArea);
-                requestDto.CodigoSede = int.Parse(request.CodigoSede);
-                requestDto.CodigoEmpleado1 = 1;
-                requestDto.CodigoSolicitud = request.NumeroSolicitud;
-                requestDto.CodigoTipoMantenimiento = int.Parse(request.CodigoTipoMantenimiento);
+                requestDto.Descripcion = DescripcionFicha;
+                requestDto.CodigoMantenimiento =int.Parse(NumeroMantenimiento);
+                requestDto.CantidadTecnicos = int.Parse(NumeroTecnicos);
+                requestDto.Fecha = DateTime.Now;
+                requestDto.FechaHoraRegistro = DateTime.Now;
+                requestDto.FechaInicio = DateTime.Now;
+                requestDto.FechaFin = DateTime.Now;
+                requestDto.UsuarioRegistro = "Anderson";
+                requestDto.CodigoEmpleado = 1;
+                requestDto.Accion = Accion;
+                requestDto.CodigoFichaMantenimiento =int.Parse(CodigoFichaMantenimiento);
+                
+                //requestDto.CodigoArea = int.Parse(request.CodigoArea);
+                //requestDto.CodigoSede = int.Parse(request.CodigoSede);
+                //requestDto.CodigoEmpleado1 = 1;
+                //requestDto.CodigoSolicitud = request.NumeroSolicitud;
+                //requestDto.CodigoTipoMantenimiento = int.Parse(request.CodigoTipoMantenimiento);
                 requestDto.Estado = 1;
-                var lstFechas = request.FechaSolicitud.Split('/');
-                var fechaFinal = lstFechas[2] + '/' + lstFechas[1] + '/' + lstFechas[0];
-                requestDto.Fecha = Convert.ToDateTime(fechaFinal);
+
+                requestDto.Fecha = DateTime.Now;
                 requestDto.FechaHoraRegistro = DateTime.Now;
                 requestDto.UsuarioRegistro = "Anderson";
 
-                foreach (var item in request.ListaMantenimiento)
-                {
-                    var lstFechasDet = item.FechaMantenimiento.Split('/');
-                    var fechaFinalDet = lstFechasDet[2] + '/' + lstFechasDet[1] + '/' + lstFechasDet[0];
-                    requestDto.MantenimientoList.Add(new MantenimientoListDTO
-                    {
-                        Accion = "I",
-                        Descripcion = item.Descripcion,
-                        Nombre = item.Nombre,
-                        CodigoMantenimiento = int.Parse(item.Codigo),
-                        FechaHoraCreacion = DateTime.Now,
-                        Fecha = Convert.ToDateTime(fechaFinalDet),
-                        UsuarioCreacion = "Anderson"
-                    });
-                }
+             
 
                 var responseDetalleFicha = new FichaProxyrest().RegistrarFicha(requestDto);
 
@@ -329,87 +308,87 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Agente.BL
             }
             return resultado;
         }
-        public RegistrarFichaResponseViewModel DeshabilitarFicha(RegistrarFicha request)
-        {
-            var resultado = new RegistrarFichaResponseViewModel();
-            try
-            {
-                var requestDto = new RegistrarFichaRequestDTO();
-                requestDto.Accion = "D";
-                requestDto.Descripcion = request.Descripcion;
-                requestDto.CodigoArea = int.Parse(request.CodigoArea);
-                requestDto.CodigoSede = int.Parse(request.CodigoSede);
-                requestDto.CodigoEmpleado1 = 1;
-                requestDto.CodigoSolicitud = request.NumeroSolicitud;
-                requestDto.CodigoTipoMantenimiento = int.Parse(request.CodigoTipoMantenimiento);
-                requestDto.Estado = 1;
-                var lstFechas = request.FechaSolicitud.Split('/');
-                var fechaFinal = lstFechas[2] + '/' + lstFechas[1] + '/' + lstFechas[0];
-                requestDto.Fecha = Convert.ToDateTime(fechaFinal);
-                requestDto.FechaHoraRegistro = DateTime.Now;
-                requestDto.UsuarioRegistro = "Anderson";
+        //public RegistrarFichaResponseViewModel DeshabilitarFicha(RegistrarFicha request)
+        //{
+        //    var resultado = new RegistrarFichaResponseViewModel();
+        //    try
+        //    {
+        //        var requestDto = new RegistrarFichaRequestDTO();
+        //        requestDto.Accion = "D";
+        //        requestDto.Descripcion = request.Descripcion;
+        //        requestDto.CodigoArea = int.Parse(request.CodigoArea);
+        //        requestDto.CodigoSede = int.Parse(request.CodigoSede);
+        //        requestDto.CodigoEmpleado1 = 1;
+        //        requestDto.CodigoSolicitud = request.NumeroSolicitud;
+        //        requestDto.CodigoTipoMantenimiento = int.Parse(request.CodigoTipoMantenimiento);
+        //        requestDto.Estado = 1;
+        //        var lstFechas = request.FechaSolicitud.Split('/');
+        //        var fechaFinal = lstFechas[2] + '/' + lstFechas[1] + '/' + lstFechas[0];
+        //        requestDto.Fecha = Convert.ToDateTime(fechaFinal);
+        //        requestDto.FechaHoraRegistro = DateTime.Now;
+        //        requestDto.UsuarioRegistro = "Anderson";
 
-                var responseDetalleFicha = new FichaProxyrest().RegistrarFicha(requestDto);
+        //        var responseDetalleFicha = new FichaProxyrest().RegistrarFicha(requestDto);
 
-                if (responseDetalleFicha.Result.Satisfactorio)
-                    resultado.Result.Satisfactorio = true;
-            }
-            catch (Exception ex)
-            {
-                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
-                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
-                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
-            }
-            return resultado;
-        }
-        public RegistrarFichaResponseViewModel ActualizarFicha(RegistrarFicha request)
-        {
-            var resultado = new RegistrarFichaResponseViewModel();
-            try
-            {
-                var requestDto = new RegistrarFichaRequestDTO();
-                requestDto.Accion = "U";
-                requestDto.Descripcion = request.Descripcion;
-                requestDto.CodigoArea = int.Parse(request.CodigoArea);
-                requestDto.CodigoSede = int.Parse(request.CodigoSede);
-                requestDto.CodigoEmpleado1 = 1;
-                requestDto.CodigoSolicitud = request.NumeroSolicitud;
-                requestDto.CodigoTipoMantenimiento = int.Parse(request.CodigoTipoMantenimiento);
-                requestDto.Estado = 1;
-                var lstFechas = request.FechaSolicitud.Split('/');
-                var fechaFinal = lstFechas[2] + '/' + lstFechas[1] + '/' + lstFechas[0];
-                requestDto.Fecha = Convert.ToDateTime(fechaFinal);
-                requestDto.FechaHoraRegistro = DateTime.Now;
-                requestDto.UsuarioRegistro = "Anderson";
+        //        if (responseDetalleFicha.Result.Satisfactorio)
+        //            resultado.Result.Satisfactorio = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
+        //        this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
+        //        this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
+        //    }
+        //    return resultado;
+        //}
+        //public RegistrarFichaResponseViewModel ActualizarFicha(RegistrarFicha request)
+        //{
+        //    var resultado = new RegistrarFichaResponseViewModel();
+        //    try
+        //    {
+        //        var requestDto = new RegistrarFichaRequestDTO();
+        //        requestDto.Accion = "U";
+        //        requestDto.Descripcion = request.Descripcion;
+        //        requestDto.CodigoArea = int.Parse(request.CodigoArea);
+        //        requestDto.CodigoSede = int.Parse(request.CodigoSede);
+        //        requestDto.CodigoEmpleado1 = 1;
+        //        requestDto.CodigoSolicitud = request.NumeroSolicitud;
+        //        requestDto.CodigoTipoMantenimiento = int.Parse(request.CodigoTipoMantenimiento);
+        //        requestDto.Estado = 1;
+        //        var lstFechas = request.FechaSolicitud.Split('/');
+        //        var fechaFinal = lstFechas[2] + '/' + lstFechas[1] + '/' + lstFechas[0];
+        //        requestDto.Fecha = Convert.ToDateTime(fechaFinal);
+        //        requestDto.FechaHoraRegistro = DateTime.Now;
+        //        requestDto.UsuarioRegistro = "Anderson";
 
-                foreach (var item in request.ListaMantenimiento)
-                {
-                    var lstFechasDet = item.FechaMantenimiento.Split('/');
-                    var fechaFinalDet = lstFechasDet[2] + '/' + lstFechasDet[1] + '/' + lstFechasDet[0];
-                    requestDto.MantenimientoList.Add(new MantenimientoListDTO
-                    {
-                        Accion = "I",
-                        Descripcion = item.Descripcion,
-                        Nombre = item.Nombre,
-                        CodigoMantenimiento = 0,
-                        FechaHoraCreacion = DateTime.Now,
-                        Fecha = Convert.ToDateTime(fechaFinalDet),
-                        UsuarioCreacion = "Anderson"
-                    });
-                }
-                var responseDetalleFicha = new FichaProxyrest().RegistrarFicha(requestDto);
+        //        foreach (var item in request.ListaMantenimiento)
+        //        {
+        //            var lstFechasDet = item.FechaMantenimiento.Split('/');
+        //            var fechaFinalDet = lstFechasDet[2] + '/' + lstFechasDet[1] + '/' + lstFechasDet[0];
+        //            requestDto.MantenimientoList.Add(new MantenimientoListDTO
+        //            {
+        //                Accion = "I",
+        //                Descripcion = item.Descripcion,
+        //                Nombre = item.Nombre,
+        //                CodigoMantenimiento = 0,
+        //                FechaHoraCreacion = DateTime.Now,
+        //                Fecha = Convert.ToDateTime(fechaFinalDet),
+        //                UsuarioCreacion = "Anderson"
+        //            });
+        //        }
+        //        var responseDetalleFicha = new FichaProxyrest().RegistrarFicha(requestDto);
 
-                if (responseDetalleFicha.Result.Satisfactorio)
-                    resultado.Result.Satisfactorio = true;
-            }
-            catch (Exception ex)
-            {
-                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
-                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
-                this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
-            }
-            return resultado;
-        }
+        //        if (responseDetalleFicha.Result.Satisfactorio)
+        //            resultado.Result.Satisfactorio = true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.Message, Environment.NewLine));
+        //        this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.InnerException, Environment.NewLine));
+        //        this.RegistrarEvento(@"C:\LOG\logPetCenter.text", string.Format("{0}{1}", ex.StackTrace, Environment.NewLine));
+        //    }
+        //    return resultado;
+        //}
         private void RegistrarEvento(string ruta, string mensaje)
         {
             try

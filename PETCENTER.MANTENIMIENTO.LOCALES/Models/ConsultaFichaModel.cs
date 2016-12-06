@@ -190,19 +190,9 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Models
 
     public class RegistrarFicha
     {
-        public int NumeroSolicitud { get; set; }
-        public string FechaSolicitud { get; set; }
-        public string CodigoTipoMantenimiento { get; set; }
-        public string CodigoSede { get; set; }
-        public string CodigoArea { get; set; }
-        public string Descripcion { get; set; }
-        public RegistrarFicha()
-        {
-            ListaMantenimiento = new List<MantenimientoViewModel>();
-            this.Result = new Result();
-        }
-        public List<MantenimientoViewModel> ListaMantenimiento { get; set; }
-        public Result Result { get; set; }
+        public int NumeroMantenimiento { get; set; }
+        public string DescripcionFicha { get; set; }
+        public string NumeroTecnicos { get; set; }
     }
     public class RegistrarFichaResponseViewModel
     {

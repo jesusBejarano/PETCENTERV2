@@ -43,30 +43,42 @@
                             return false;
                         }
 
-                        if (validateForm("#BuscarMaterialesMantenimientoFrm") == false) {
-                            return false;
-                        }
-                        var trf = $("#listaMaterialesMantenimiento tbody:first tr:first")[0];
-                        $("#listaMaterialesMantenimiento tbody:first").empty().append(trf);
+                        //if (validateForm("#BuscarMaterialesMantenimientoFrm") == false) {
+                        //    return false;
+                        //}
+                        //var trf = $("#listaMaterialesMantenimiento tbody:first tr:first")[0];
+                        //$("#listaMaterialesMantenimiento tbody:first").empty().append(trf);
 
-                        var request = $rootScope.DatosFormulario.DatosMateriales;
-                        $.ajax({
-                            url: "ObtenerActividades",
-                            type: "POST",
-                            headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
-                            data: request,
-                            dataType: "json",
-                            cache: true,
-                            async: false,
-                            success: function (data) {
-                                if (data) {
-                                    for (i = 0; i < data.ListaActividad.length; i++) {
-                                        jQuery("#listaActividadMantenimiento").jqGrid('addRowData', i + 1, data.ListaActividad[i]);
-                                    }
-                                }
-                            }
-                        });
+                        //var request = $rootScope.DatosFormulario.DatosMateriales;
+                        //$.ajax({
+                        //    url: "ObtenerActividades",
+                        //    type: "POST",
+                        //    headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
+                        //    data: request,
+                        //    dataType: "json",
+                        //    cache: true,
+                        //    async: false,
+                        //    success: function (data) {
+                        //        if (data) {
+                        //            for (i = 0; i < data.ListaActividad.length; i++) {
+                        //                jQuery("#listaActividadMantenimiento").jqGrid('addRowData', i + 1, data.ListaActividad[i]);
+                        //            }
+                        //        }
+                        //    }
+                        //});
 
+
+                        var objDuro = {};
+                        objDuro.Codigo = "1";
+                        objDuro.Descripcion = "Material 1";
+
+                        var objDuro2 = {};
+                        objDuro2.Codigo = "2";
+                        objDuro2.Descripcion = "Material 2";
+                        jQuery("#listaMaterialesMantenimiento").jqGrid('addRowData', i + 1, objDuro);
+                        jQuery("#listaMaterialesMantenimiento").jqGrid('addRowData', i + 1, objDuro2);
+
+                        
                         return false;
                      
                     };
@@ -89,9 +101,9 @@
 
 
                         var objMaterial = {};
-                        objActividad.Codigo = celValue_Codigo;
-                        objActividad.Descripcion = celValue_Descripcion;
-                        objActividad.Cantidad = celValue_Cantidad;
+                        objMaterial.Codigo = celValue_Codigo;
+                        objMaterial.Descripcion = celValue_Descripcion;
+                        objMaterial.Cantidad = celValue_Cantidad;
 
                         jQuery("#listaMateriales").jqGrid('addRowData', i + 1, objMaterial);
 

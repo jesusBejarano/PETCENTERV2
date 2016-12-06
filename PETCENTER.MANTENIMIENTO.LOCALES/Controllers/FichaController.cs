@@ -65,33 +65,32 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Controllers
             actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
             return actionResult;
         }
-        public ActionResult RegistrarFicha(string request)
+        public ActionResult RegistrarFicha(string NumeroMantenimiento,string DescripcionFicha, string NumeroTecnicos,string Accion,string CodigoFichaMantenimiento)
         {
             ActionResult actionResult = null;
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            var datos = jsonSerializer.Deserialize<RegistrarFicha>(request);
-            var responseViewModel = new FichaAgente().RegistrarFicha(datos);
+         
+            var responseViewModel = new FichaAgente().RegistrarFicha(NumeroMantenimiento,DescripcionFicha, NumeroTecnicos,  Accion, CodigoFichaMantenimiento);
             actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
             return actionResult;
         }
-        public ActionResult DeshabilitarFicha(string request)
-        {
-            ActionResult actionResult = null;
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            var datos = jsonSerializer.Deserialize<RegistrarFicha>(request);
-            var responseViewModel = new FichaAgente().DeshabilitarFicha(datos);
-            actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
-            return actionResult;
-        }
-        public ActionResult ActualizarFicha(string request)
-        {
-            ActionResult actionResult = null;
-            JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
-            var datos = jsonSerializer.Deserialize<RegistrarFicha>(request);
-            var responseViewModel = new FichaAgente().ActualizarFicha(datos);
-            actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
-            return actionResult;
-        }
+        //public ActionResult DeshabilitarFicha(string request)
+        //{
+        //    ActionResult actionResult = null;
+        //    JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+        //    var datos = jsonSerializer.Deserialize<RegistrarFicha>(request);
+        //    var responseViewModel = new FichaAgente().DeshabilitarFicha(datos);
+        //    actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
+        //    return actionResult;
+        //}
+        //public ActionResult ActualizarFicha(string request)
+        //{
+        //    ActionResult actionResult = null;
+        //    JavaScriptSerializer jsonSerializer = new JavaScriptSerializer();
+        //    var datos = jsonSerializer.Deserialize<RegistrarFicha>(request);
+        //    var responseViewModel = new FichaAgente().ActualizarFicha(datos);
+        //    actionResult = Content(JsonConvert.SerializeObject(responseViewModel));
+        //    return actionResult;
+        //}
 
         public ActionResult ConsultaFicha()
         {

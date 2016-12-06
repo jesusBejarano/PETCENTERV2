@@ -187,11 +187,15 @@
     <Compile Include="Agente\DTO\MantenimientoDTO.cs" />
     <Compile Include="Agente\DTO\MantenimientoListDTO.cs" />
     <Compile Include="Agente\DTO\MaterialDTO.cs" />
+    <Compile Include="Agente\DTO\ObtenerFichaMantenimientoRequestDTO.cs" />
+    <Compile Include="Agente\DTO\ObtenerFichaMantenimientoResponseDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerFichaRequestDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerFichaResponseDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerSolicitudRequestDTO.cs" />
     <Compile Include="Agente\DTO\ObtenerSolicitudResponseDTO.cs" />
     <Compile Include="Agente\DTO\PaginacionDTO.cs" />
+    <Compile Include="Agente\DTO\RegistrarFichaMantenimientoRequestDTO.cs" />
+    <Compile Include="Agente\DTO\RegistrarFichaMantenimientoResponseDTO.cs" />
     <Compile Include="Agente\DTO\RegistrarFichaRequestDTO.cs" />
     <Compile Include="Agente\DTO\RegistrarFichaResponseDTO.cs" />
     <Compile Include="Agente\DTO\RegistrarSolicitudRequestDTO.cs" />

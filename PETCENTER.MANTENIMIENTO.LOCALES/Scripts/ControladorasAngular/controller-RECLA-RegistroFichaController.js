@@ -15,9 +15,9 @@
                             $rootScope.DatosFormulario.DatosFichaCargaInicial = {};
 
 
-                        var paramCodigoSolicitud = getUrlVars()["codigoSolicitud"];
+                        var paramCodigoSolicitud = getUrlVars()["codigoFicha"];
                         if (paramCodigoSolicitud) {
-                            $rootScope.DatosFormulario.DatosFicha.SolicitudFlagEditar = true;
+                            $rootScope.DatosFormulario.DatosFicha.FichaFlagEditar = true;
                             $rootScope.DatosFormulario.DatosFicha.CodigoSolicitud = paramCodigoSolicitud;
                         }
 
@@ -31,7 +31,7 @@
                             $scope.FlagMostrarBotonHistorial = true;
                             $scope.FlagMostrarBotonDeshabilitar = true;
                             $scope.FlagMostrarBotonGuardar = false;
-                            $scope.CargaEdicionSolicitud();
+                            $scope.CargaEdicionFicha();
                             $scope.FlagEditing = false;
                             $scope.FlagMostrarDescargarCarga = true;
                             $scope.FlagMostrarDescargarSustento = true;
@@ -85,10 +85,34 @@
                             async: false,
                             success: function (data) {
                                 if (data != null) {
-                                    $rootScope.DatosFormulario.DatosFicha = data;
-                                    for (i = 0; i < data.ListaMantenimiento.length; i++) {
-                                        jQuery("#listaMantenimientos").jqGrid('addRowData', i + 1, data.ListaMantenimiento[i]);
-                                    }
+                                    $rootScope.DatosFormulario.DatosFicha.NumeroMantenimiento = data.CodigoMantenimiento;
+                                    $rootScope.DatosFormulario.DatosFicha.DescripcionSoliciud = "Demo Solicitud";
+                                    $rootScope.DatosFormulario.DatosFicha.TipoMantenimiento = data.DescripcionTipoMantenimiento;
+                                    $rootScope.DatosFormulario.DatosFicha.Area = data.DescripcionAreaMantenimiento;
+                                    $rootScope.DatosFormulario.DatosFicha.DescripcionMantenimiento = "Demo Mantenimiento";
+                                    $rootScope.DatosFormulario.DatosFicha.Sede = data.DescripcionSedeMantenimiento;
+                                    $rootScope.DatosFormulario.DatosFicha.DescripcionFicha = data.DescrpcionFichaMantenimiento;
+                                    $rootScope.DatosFormulario.DatosFicha.HoraMantenimiento ="5:50";
+                                    $rootScope.DatosFormulario.DatosFicha.FechaMantenimiento = "05/12/2016";
+                                    $rootScope.DatosFormulario.DatosFicha.NumeroTecnicos = data.CantidadTecnicosFichaMantenimiento;
+
+
+                                    var objActividad = {};
+                                    objActividad.Codigo = "1";
+                                    objActividad.Descripcion = "LIMPIEZA DE ZOCALO";
+
+                                    jQuery("#listaActividades").jqGrid('addRowData', i + 1, objActividad);
+
+                                    var objMaterial = {};
+                                    objMaterial.Codigo = "1";
+                                    objMaterial.Descripcion = "Material 1";
+                                    objMaterial.Cantidad = "1";
+
+                                    jQuery("#listaMateriales").jqGrid('addRowData', i + 1, objMaterial);
+                                    //$rootScope.DatosFormulario.DatosFicha = data;
+                                    //for (i = 0; i < data.ListaMantenimiento.length; i++) {
+                                    //    jQuery("#listaMantenimientos").jqGrid('addRowData', i + 1, data.ListaMantenimiento[i]);
+                                    //}
                                 }
 
                             }
@@ -96,42 +120,25 @@
                     }
 
                     $scope.Deshabilitar_Click = function () {
-                        if ($rootScope.DatosFormulario.DatosFicha.NumeroSolicitud > 0) {
+                        var numeroMan = $rootScope.DatosFormulario.DatosFicha.NumeroMantenimiento;
+                        var descMan = $rootScope.DatosFormulario.DatosFicha.DescripcionFicha;
+                        var numTec = $rootScope.DatosFormulario.DatosFicha.NumeroTecnicos;
+                        var codFicha = $rootScope.DatosFormulario.DatosFicha.CodigoSolicitud
+                        var accion = "D";
+                      
+                        $.ajax({
+                            url: "/Ficha/RegistrarFicha",
+                            type: "POST",
+                            headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
+                            data: "NumeroMantenimiento=" + numeroMan + "&DescripcionFicha=" + descMan + "&NumeroTecnicos=" + numTec + "&Accion=" + accion + "&CodigoFichaMantenimiento=" + codFicha,
+                            dataType: "json",
+                            cache: true,
+                            async: false,
+                            success: function (data) {
+                                MiAlertOk("Se ha deshabilidado correctamente la ficha.", MiAlertOk_success);
 
-                            MiConfirm("¿Está seguro de deshabilitar la ficha?.", function () {
-                                var request = $rootScope.DatosFormulario.DatosFicha;
-                                $.ajax({
-                                    url: "/Ficha/DeshabilitarFicha",
-                                    type: "POST",
-                                    headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
-                                    data: "request=" + JSON.stringify(request),
-                                    dataType: "json",
-                                    cache: true,
-                                    async: false,
-                                    success: function (data) {
-                                        if (data.Result != null) {
-                                            if (data.Result.Satisfactorio === true) {
-                                                MiAlertOk("Se ha deshabilitado correctamente la ficha.", MiAlertOk_success);
-                                                //$rootScope.Redirect("/#!/sistema/busqueda/buscar-tarifa-local/");
-                                            }
-                                            else {
-                                                if (data.Result.Mensajes.length > 0) {
-                                                    MiError(data.Result.Mensajes[0].Mensaje);
-                                                }
-                                                else {
-                                                    MiError(data.Result.Mensaje);
-                                                }
-                                            }
-                                        } else {
-                                            MiAlert("Ocurrió un problema interno en el sistema.");
-                                        }
-
-                                    }
-                                });
-
-
-                            });
-                        }
+                            }
+                        });
                     }
 
                     $scope.Modificar_Click = function () {
@@ -142,62 +149,41 @@
 
                     $scope.Guardar_Click = function () {
 
-                        var validacion = validacionesCamposGuardar();
-                        if (validacion == false) {
-                            return false;
-                        }
+                        //var validacion = validacionesCamposGuardar();
+                        //if (validacion == false) {
+                        //    return false;
+                        //}
 
-                        guardarAux();
+                        //guardarAux();
                     };
 
                     $("#btnGuardar").off('click').on('click', function () {
-                        if ($rootScope.DatosFormulario.DatosFicha.NumeroSolicitud > 0) {
-                            actualizar();
-                        } else {
-                            guardar();
+                        var numeroMan = $rootScope.DatosFormulario.DatosFicha.NumeroMantenimiento;
+                        var descMan = $rootScope.DatosFormulario.DatosFicha.DescripcionFicha;
+                        var numTec = $rootScope.DatosFormulario.DatosFicha.NumeroTecnicos;
+                        var accion = "I";
+                        if ($rootScope.DatosFormulario.DatosFicha.CodigoSolicitud > 0) {
+                            accion = "U";
                         }
-
-
-                    });
-
-                    function guardar() {
-
-                        var validacion = validacionesCamposGuardar();
-                        if (validacion == false) {
-                            return false;
-                        }
-                        $rootScope.DatosFormulario.DatosFicha.ListaMantenimiento = $('#listaMantenimientos').jqGrid('getGridParam', 'data');
-                        var request = $rootScope.DatosFormulario.DatosSolicitud;
+                        var codFicha = $rootScope.DatosFormulario.DatosFicha.CodigoSolicitud
                         $.ajax({
                             url: "/Ficha/RegistrarFicha",
                             type: "POST",
                             headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
-                            data: "request=" + JSON.stringify(request),
+                            data: "NumeroMantenimiento=" + numeroMan + "&DescripcionFicha=" + descMan + "&NumeroTecnicos=" + numTec + "&Accion=" + accion + "&CodigoFichaMantenimiento=" + codFicha,
                             dataType: "json",
                             cache: true,
                             async: false,
                             success: function (data) {
-                                if (data.Result != null) {
-                                    if (data.Result.Satisfactorio === true) {
-                                        MiAlertOk("Se ha registrado correctamente la ficha.", MiAlertOk_success);
-                                        //$rootScope.Redirect("/#!/sistema/busqueda/buscar-tarifa-local/");
-                                    }
-                                    else {
-                                        if (data.Result.Mensajes.length > 0) {
-                                            MiError(data.Result.Mensajes[0].Mensaje);
-                                        }
-                                        else {
-                                            MiError(data.Result.Mensaje);
-                                        }
-                                    }
-                                } else {
-                                    MiAlert("Ocurrió un problema interno en el sistema.");
-                                }
+                                MiAlertOk("Se ha guardado correctamente la ficha.", MiAlertOk_success);
 
                             }
                         });
 
-                    }
+                        
+                    });
+
+                   
                     function actualizar() {
 
                         var validacion = validacionesCamposGuardar();
