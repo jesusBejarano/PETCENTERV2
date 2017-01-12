@@ -4,7 +4,7 @@
 }
 <div class="block" style="min-height: 500px;">
     <div ng-app="api" ng-controller="BuscarMaterialesFichaController" class="ng-scope">
-        <div id="seccion-1">
+        <div id="seccion-1">0
             <div class="block_menu">
                 <div style="max-width: 100%; height: 100%">
                     <div class="boton" ng-show="FlagMostrarBotonGuardar">
@@ -59,8 +59,8 @@
                                                    maxlength="70"
                                                    type="text"
                                                    ng-enter="Enter()"
-                                                   ng-model="$root.DatosFormulario.DatosMateriales.Descripcion"
-                                                   data-bind="value: $root.DatosFormulario.DatosMateriales.NumeroSolicitud"
+                                                   ng-model="$root.DatosFormulario.DatosMateriales.DescripcionMaterial"
+                                                   data-bind="value: $root.DatosFormulario.DatosMateriales.Descripcion"
                                                    data-val="true"
                                                    data-val-required="Nombre es requerido."
                                                    id="$root.DatosFormulario.DatosMateriales.NumeroSolicitud"

@@ -93,7 +93,7 @@
                                     $rootScope.DatosFormulario.DatosFicha.Sede = data.DescripcionSedeMantenimiento;
                                     $rootScope.DatosFormulario.DatosFicha.DescripcionFicha = data.DescrpcionFichaMantenimiento;
                                     $rootScope.DatosFormulario.DatosFicha.HoraMantenimiento ="5:50";
-                                    $rootScope.DatosFormulario.DatosFicha.FechaMantenimiento = "05/12/2016";
+                                    $rootScope.DatosFormulario.DatosFicha.FechaMantenimiento = data.FechaInicioFichaMantenimiento;
                                     $rootScope.DatosFormulario.DatosFicha.NumeroTecnicos = data.CantidadTecnicosFichaMantenimiento;
 
 
@@ -387,7 +387,7 @@
                     $scope.AgregarActividad_Click = function () {
                         var altura = 800;
                         getPopupResponsive({
-                            formURL: "BuscarActividad",
+                            formURL: "http://localhost:35226/Ficha/BuscarActividad",
                             title: "Buscar Actividad",
                             nombreDiv: "divPopupBuscarActividad",
                             nombreGrid: "",
@@ -410,7 +410,7 @@
                     $scope.AgregarMateriales_Click = function () {
                         var altura = 800;
                         getPopupResponsive({
-                            formURL: "BuscarMateriales",
+                            formURL: "http://localhost:35226/Ficha/BuscarMateriales",
                             title: "Buscar Materiales",
                             nombreDiv: "divPopupBuscarMateriales",
                             nombreGrid: "",
@@ -446,7 +446,7 @@
                                formatter: function (cellvalue, options, rowObject) {
                                    return "<div style='width:100%;padding-left:10px'>" +
                                      "<a style='cursor:pointer;width:100%'>" +
-                                     "<button title='Eliminar'  onclick='Eliminar(" + options.rowId + ")' class='boton1Style botonpequenio'>" +
+                                     "<button title='Eliminar'  onclick='EliminarActividad(" + options.rowId + ")' class='boton1Style botonpequenio'>" +
                                      "<img width='16' height='16' src='/Images/eliminar.png'></button></a></div>";
                                }
                            }
@@ -471,7 +471,7 @@
                                formatter: function (cellvalue, options, rowObject) {
                                    return "<div style='width:100%;padding-left:10px'>" +
                                      "<a style='cursor:pointer;width:100%'>" +
-                                     "<button title='Eliminar'  onclick='Eliminar(" + options.rowId + ")' class='boton1Style botonpequenio'>" +
+                                     "<button title='Eliminar'  onclick='EliminarMaterial(" + options.rowId + ")' class='boton1Style botonpequenio'>" +
                                      "<img width='16' height='16' src='/Images/eliminar.png'></button></a></div>";
                                }
                            }

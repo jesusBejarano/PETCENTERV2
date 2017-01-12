@@ -30,15 +30,8 @@
                     }
 
                     $scope.Buscar_Click = function () {
-                        //var objSolicitudMantenimiento = {};
-                        //objSolicitudMantenimiento.NumeroSolicitud = "43";
-                        //objSolicitudMantenimiento.Descripcion = "Prueba";
-                        //objSolicitudMantenimiento.Fecha = "10/11/2017";
-                        //objSolicitudMantenimiento.Sede = "San Miguel";
-                        //objSolicitudMantenimiento.Area = "Limpieza";
-                        //objSolicitudMantenimiento.Solicitante = "Jesus";
+                        //  $scope.compilarGrilla("#consultaSolicitudes");
 
-                        //jQuery("#listaSolicitudMantenimiento").jqGrid('addRowData', i + 1, objSolicitudMantenimiento);
                         if ($rootScope.EsEnter) {
                             return false;
                         }
@@ -46,39 +39,27 @@
                         //if (validateForm("#BuscarMaterialesMantenimientoFrm") == false) {
                         //    return false;
                         //}
-                        //var trf = $("#listaMaterialesMantenimiento tbody:first tr:first")[0];
-                        //$("#listaMaterialesMantenimiento tbody:first").empty().append(trf);
+                        var trf = $("#listaMaterialesMantenimiento tbody:first tr:first")[0];
+                        $("#listaMaterialesMantenimiento tbody:first").empty().append(trf);
 
-                        //var request = $rootScope.DatosFormulario.DatosMateriales;
-                        //$.ajax({
-                        //    url: "ObtenerActividades",
-                        //    type: "POST",
-                        //    headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
-                        //    data: request,
-                        //    dataType: "json",
-                        //    cache: true,
-                        //    async: false,
-                        //    success: function (data) {
-                        //        if (data) {
-                        //            for (i = 0; i < data.ListaActividad.length; i++) {
-                        //                jQuery("#listaActividadMantenimiento").jqGrid('addRowData', i + 1, data.ListaActividad[i]);
-                        //            }
-                        //        }
-                        //    }
-                        //});
+                        var request = $rootScope.DatosFormulario.DatosMateriales;
+                        $.ajax({
+                            url: "/Ficha/ObtenerMateriales",
+                            type: "POST",
+                            headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
+                            data: request,
+                            dataType: "json",
+                            cache: true,
+                            async: false,
+                            success: function (data) {
+                                if (data) {
+                                    for (i = 0; i < data.ListaMaterial.length; i++) {
+                                        jQuery("#listaMaterialesMantenimiento").jqGrid('addRowData', i + 1, data.ListaMaterial[i]);
+                                    }
+                                }
+                            }
+                        });
 
-
-                        var objDuro = {};
-                        objDuro.Codigo = "1";
-                        objDuro.Descripcion = "Material 1";
-
-                        var objDuro2 = {};
-                        objDuro2.Codigo = "2";
-                        objDuro2.Descripcion = "Material 2";
-                        jQuery("#listaMaterialesMantenimiento").jqGrid('addRowData', i + 1, objDuro);
-                        jQuery("#listaMaterialesMantenimiento").jqGrid('addRowData', i + 1, objDuro2);
-
-                        
                         return false;
                      
                     };

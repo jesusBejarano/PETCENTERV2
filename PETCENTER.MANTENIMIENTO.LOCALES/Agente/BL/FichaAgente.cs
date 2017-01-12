@@ -308,6 +308,8 @@ namespace PETCENTER.MANTENIMIENTO.LOCALES.Agente.BL
             }
             return resultado;
         }
+
+        
         //public RegistrarFichaResponseViewModel DeshabilitarFicha(RegistrarFicha request)
         //{
         //    var resultado = new RegistrarFichaResponseViewModel();

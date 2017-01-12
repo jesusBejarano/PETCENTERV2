@@ -353,7 +353,7 @@
                     $scope.AgregarMantenimiento_Click = function () {
                         var altura = 800;
                         getPopupResponsive({
-                            formURL: "AgregarMantenimiento",
+                            formURL: "/Solicitud/AgregarMantenimiento",
                             title: "Agregar Mantenimiento",
                             nombreDiv: "divPopupAgregarMantenimiento",
                             nombreGrid: "",

@@ -87,12 +87,12 @@
                                 if (data) {
                                     FechaInicioDefault = data.FechaInicio;
                                     FechaFinDefault = data.FechaFin;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaInicio = FechaInicioDefault;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaFin = FechaFinDefault;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.Estado = data.Estado;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.TipoMantenimiento = data.TipoMantenimiento;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.Sede = data.Sede;
-                                    $rootScope.DatosFormulario.FiltrosBusquedaFichaCargaInicial.Area = data.Area;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaInicio = FechaInicioDefault;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaFin = FechaFinDefault;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Estado = data.Estado;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.TipoMantenimiento = data.TipoMantenimiento;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Sede = data.Sede;
+                                    $rootScope.DatosFormulario.FiltrosBusquedaSolicitudCargaInicial.Area = data.Area;
                                 }
                             }
                         } );
@@ -110,8 +110,8 @@
                         var trf = $("#consultaSolicitudes tbody:first tr:first")[0];
                         $("#consultaSolicitudes tbody:first").empty().append(trf);
 
-                        var temFechaInicio = $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaInicio;
-                        var temFechaFin = $rootScope.DatosFormulario.FiltrosBusquedaFicha.FechaFin;
+                        var temFechaInicio = $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaInicio;
+                        var temFechaFin = $rootScope.DatosFormulario.FiltrosBusquedaSolicitud.FechaFin;
 
                         var fechaInicio = temFechaInicio.split(" ")[0].split("/");
                         var fechaFin = temFechaFin.split(" ")[0].split("/");
@@ -122,7 +122,7 @@
                        
                         //fechaFinFinal = '2016-11-29 17:15:45';
 
-                        var request = $rootScope.DatosFormulario.FiltrosBusquedaFicha;
+                        var request = $rootScope.DatosFormulario.FiltrosBusquedaSolicitud;
                         request.FechaInicioFinal = fechaInicioFinal;
                         request.FechaFinFinal = fechaFinFinal;
                         //var request = { "request": objRequest };
@@ -137,7 +137,7 @@
                             success: function (data) {
                                 if (data) {
                                     for (i = 0; i < data.ListaSolicitud.length; i++) {
-                                        jQuery("#listaSolicitudMantenimiento").jqGrid('addRowData', i + 1, data.ListaSolicitud[i]);
+                                        jQuery("#consultaSolicitudes").jqGrid('addRowData', i + 1, data.ListaSolicitud[i]);
                                     }
                                 }
                             }
@@ -238,31 +238,41 @@
                     });
 
                   
-
-                    jQuery("#listaSolicitudMantenimiento").jqGrid({
+                    jQuery("#consultaSolicitudes").jqGrid({
                         //url: 'ObtenerSolicitudes',
                         datatype: "local",
-                        colNames: ['Código', 'Descripción','Fecha Creación', 'Tipo Mantenimiento', 'Sede', 'Área'],
+                        colNames: ['Código', 'Estado', 'Fecha Creación', 'Tipo Mantenimiento', 'Sede', 'Área', 'Editar'],
                         colModel: [
                             { name: 'Codigo', index: 'Codigo', width: 220, align: "center", sortable: false },
-                            { name: 'Descripcion', index: 'Descripcion', width: 220, align: "center", sortable: false },
+                            { name: 'Estado', index: 'Estado', width: 220, align: "center", sortable: false },
                             { name: 'FechaHoraCreacion', index: 'FechaHoraCreacion', width: 220, align: "center", sortable: false },
                             { name: 'TipoMantenimiento', index: 'TipoMantenimiento', width: 220, align: "center", sortable: false },
                             { name: 'Sede', index: 'Sede', width: 220, align: "center", sortable: false },
-                            { name: 'Area', index: 'Area', width: 220, sortable: false, align: "center", }
-                           
+                            { name: 'Area', index: 'Area', width: 220, sortable: false, align: "center", },
+                           {
+                               name: 'Editar',
+                               align: 'center',
+                               sortable: false,
+                               width: 230,
+                               formatter: function (cellvalue, options, rowObject) {
+                                   return "<div style='width:100%;padding-left:10px'>" +
+                                     "<a style='cursor:pointer;width:100%'>" +
+                                     "<button title='Imprimir' onclick='Editar(" + rowObject.Codigo + ")'  class='boton1Style botonpequenio'>" +
+                                     "<img width='16' height='16' src='/Images/editar.png'></button></a></div>";
+                               }
+                           }
                         ],
                         rowNum: 10,
                         rowList: [10, 20, 30],
-                        pager: '#pagerlistaSolicitudMantenimiento',
+                        pager: '#pagerconsultaSolicitudes',
                         //sortname: 'Codigo',
                         shrinkToFit: false,
                         autowidth: true,
-                        
+
                         viewrecords: true//,
                         //sortorder: "desc"
                     });
-                    jQuery("#listaSolicitudMantenimiento").jqGrid('navGrid', '#pagerlistaSolicitudMantenimiento', { edit: false, add: false, del: false });
+                    jQuery("#consultaSolicitudes").jqGrid('navGrid', '#pagerconsultaSolicitudes', { edit: false, add: false, del: false });
                    
 
                     //$scope.compilarGrilla = function(Id) {

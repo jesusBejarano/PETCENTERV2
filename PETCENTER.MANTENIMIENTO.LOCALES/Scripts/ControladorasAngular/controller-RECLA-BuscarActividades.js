@@ -35,15 +35,15 @@
                             return false;
                         }
 
-                        if (validateForm("#BuscarActividadMantenimientoFrm") == false) {
-                            return false;
-                        }
+                        //if (validateForm("#BuscarActividadMantenimientoFrm") == false) {
+                        //    return false;
+                        //}
                         var trf = $("#listaActividadMantenimiento tbody:first tr:first")[0];
                         $("#listaActividadMantenimiento tbody:first").empty().append(trf);
 
                         var request = $rootScope.DatosFormulario.DatosActividad;
                         $.ajax({
-                            url: "ObtenerActividades",
+                            url: "/Ficha/ObtenerActividades",
                             type: "POST",
                             headers: { __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val() },
                             data: request,

@@ -521,10 +521,14 @@
 <script>
 
 
-    function Eliminar(idMantenimiento) {
-        MiConfirm("¿Está seguro de eliminar el mantenimiento?.", function () {
-            $('#listaMantenimientos').jqGrid('delRowData', idMantenimiento);
+    function EliminarActividad(idActividad) {
+        MiConfirm("¿Está seguro de eliminar la Actividad?.", function () {
+            $('#listaActividades').jqGrid('delRowData', idActividad);
         });
-
+    }
+    function EliminarMaterial(idMaterial) {
+        MiConfirm("¿Está seguro de eliminar el Material?.", function () {
+            $('#listaMateriales').jqGrid('delRowData', idMaterial);
+        });
     }
 </script>
